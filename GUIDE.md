@@ -7,19 +7,40 @@
 
 ## 📥 การติดตั้ง
 
-### วิธีที่ 1: ติดตั้งผ่าน Claude Code (แนะนำ)
+### วิธีที่ 1: Clone จาก GitHub (แนะนำ - ใช้งานส่วนตัว)
+
+**Windows (PowerShell):**
+```powershell
+git clone https://github.com/vongsagon-git/axon-zenith.git "$env:USERPROFILE\.claude\commands\axon-zenith"
+xcopy /E /I /Y "$env:USERPROFILE\.claude\commands\axon-zenith\commands\*" "$env:USERPROFILE\.claude\commands\axon\"
+```
+
+**Windows (ใน Claude Code):**
+```bash
+!git clone https://github.com/vongsagon-git/axon-zenith.git "%USERPROFILE%\.claude\commands\axon-zenith" && xcopy /E /I /Y "%USERPROFILE%\.claude\commands\axon-zenith\commands\*" "%USERPROFILE%\.claude\commands\axon\"
+```
+
+**macOS / Linux:**
+```bash
+git clone https://github.com/vongsagon-git/axon-zenith.git ~/.claude/commands/axon-zenith
+cp -r ~/.claude/commands/axon-zenith/commands/* ~/.claude/commands/axon/
+```
+
+> 💡 **หมายเหตุ:** วิธีนี้จะติดตั้ง commands แบบ global ใช้ได้ทุกโปรเจค
+
+### วิธีที่ 2: ติดตั้งผ่าน Official Marketplace (เร็วๆ นี้)
 ```bash
 /plugin install vongsagon-git/axon-zenith
 ```
-
-### วิธีที่ 2: Clone แล้วลิงก์เอง
-```bash
-git clone https://github.com/vongsagon-git/axon-zenith.git ~/.claude/plugins/axon-zenith
-```
+> ⚠️ ต้องรอ Anthropic อนุมัติก่อน
 
 ### ตรวจสอบการติดตั้ง
-```bash
-/plugin list
+หลังติดตั้งแล้ว ลองพิมพ์ `/axon` ใน Claude Code จะเห็น:
+```
+/axon:setup
+/axon:concept
+/axon:ignite
+/axon:mcp
 ```
 
 ---
