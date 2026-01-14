@@ -9,17 +9,28 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 
 ---
 
-## 🚨 CURRENT VERSION
+## 🚨 DYNAMIC VERSION DETECTION
 
 ```
 ╔═══════════════════════════════════════════════════════════════════╗
-║  📦 AXON ZENITH LATEST: v1.3 (Master Blueprint v8.0)             ║
+║  📦 LATEST VERSION = อ่านจาก SOURCE CLAUDE.md!                    ║
 ╠═══════════════════════════════════════════════════════════════════╣
-║  Key Features:                                                    ║
-║  • MAP-Centric Architecture                                       ║
-║  • Live Enlightenment (ตรัสรู้ระหว่างทำ)                          ║
-║  • Universal Resume (กลับมาทำต่อจากทุก mode)                      ║
-║  • Multi-Agent Support (T tasks + E tasks)                        ║
+║                                                                   ║
+║  🔍 STEP 1: อ่าน CLAUDE.md จาก axon-new repository               ║
+║     → หา "Master Blueprint vX.X" ใน title                        ║
+║     → นั่นคือ LATEST VERSION                                      ║
+║                                                                   ║
+║  🔍 STEP 2: อ่าน user's CLAUDE.md                                 ║
+║     → หา "Master Blueprint vX.X" ใน title                        ║
+║     → นั่นคือ CURRENT VERSION                                     ║
+║                                                                   ║
+║  🔍 STEP 3: เปรียบเทียบ                                           ║
+║     → CURRENT < LATEST → ต้อง upgrade                            ║
+║     → CURRENT = LATEST → ไม่ต้องทำอะไร                            ║
+║                                                                   ║
+║  ⚠️ ไม่มี HARDCODE VERSION ในไฟล์นี้!                             ║
+║     → ทุกครั้งที่รัน จะอ่านจาก source ใหม่                        ║
+║                                                                   ║
 ╚═══════════════════════════════════════════════════════════════════╝
 ```
 
@@ -28,10 +39,10 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 ## 🖥️ STATUS DISPLAY
 
 ```
-┌──────────────────────────────────────────────┐
-│ 🤖 Opus 4.5 | 🔄 UPGRADE | [old] → v1.3     │
-│ 📊 Checking files...                         │
-└──────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│ 🤖 Opus 4.5 | 🔄 UPGRADE                                 │
+│ 📊 Current: [detected] | Latest: [from source]          │
+└──────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -40,150 +51,112 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
-║  🔄 UPGRADE PROTOCOL                                                  ║
+║  🔄 DYNAMIC UPGRADE PROTOCOL                                         ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║                                                                       ║
-║  Step 1: VERSION CHECK                                                ║
-║     → อ่าน CLAUDE.md หา version ปัจจุบัน                              ║
-║     → เปรียบเทียบกับ version ล่าสุด                                   ║
+║  Step 1: DETECT LATEST VERSION                                       ║
+║     → อ่าน CLAUDE.md จาก axon-new repository                        ║
+║     → หา "Master Blueprint vX.X" → นั่นคือ latest                    ║
+║     → หา features ใน source CLAUDE.md                                ║
 ║                                                                       ║
-║  Step 2: BACKUP                                                       ║
-║     → สร้าง backup ไฟล์ที่จะแก้ไข                                     ║
-║     → เก็บไว้ที่ .axon/backup/                                        ║
+║  Step 2: DETECT CURRENT VERSION                                      ║
+║     → อ่าน user's CLAUDE.md                                          ║
+║     → หา "Master Blueprint vX.X"                                     ║
+║     → ถ้าหาไม่เจอ → detect จาก features                              ║
 ║                                                                       ║
-║  Step 3: MERGE CHANGES                                                ║
-║     → รวม config เดิมกับ features ใหม่                                ║
-║     → ไม่ลบ customization ของ user                                    ║
+║  Step 3: COMPARE                                                     ║
+║     → IF current == latest → "คุณใช้ version ล่าสุดแล้ว!"           ║
+║     → IF current < latest → proceed to upgrade                      ║
 ║                                                                       ║
-║  Step 4: UPDATE FILES                                                 ║
-║     → อัพเดท CLAUDE.md                                                ║
-║     → อัพเดท .axon/config.md                                          ║
-║     → เพิ่มไฟล์ใหม่ (ถ้ามี)                                           ║
+║  Step 4: BACKUP (if upgrading)                                       ║
+║     → สร้าง backup ไฟล์ที่จะแก้ไข                                    ║
+║     → เก็บไว้ที่ .axon/backup/                                       ║
 ║                                                                       ║
-║  Step 5: VERIFY                                                       ║
-║     → ตรวจสอบว่าไฟล์ถูกต้อง                                           ║
-║     → ทดสอบ commands                                                  ║
+║  Step 5: COPY FROM SOURCE                                            ║
+║     → Copy CLAUDE.md จาก axon-new/templates/                        ║
+║     → รักษา user customizations                                      ║
+║                                                                       ║
+║  Step 6: VERIFY                                                      ║
+║     → ตรวจสอบว่าไฟล์ถูกต้อง                                          ║
+║     → แสดง features ใหม่ที่ได้                                       ║
 ║                                                                       ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 📋 VERSION DETECTION
+## 📋 VERSION DETECTION RULES
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
-║  📋 VERSION DETECTION                                                 ║
+║  📋 FEATURE-BASED VERSION DETECTION                                   ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║                                                                       ║
-║  ตรวจสอบ version จาก:                                                 ║
+║  ถ้าหา "Master Blueprint vX.X" ไม่เจอ → ดูจาก features:              ║
 ║                                                                       ║
-║  1. CLAUDE.md                                                         ║
-║     → หา "AXON Zenith" หรือ "Master Blueprint vX.X"                  ║
-║     → หา version number จาก title                                     ║
+║  🔍 มี "AUDIT AGENT PROTOCOL"?                                       ║
+║     → Yes = v1.4+                                                    ║
 ║                                                                       ║
-║  2. .axon/config.md                                                   ║
-║     → หา version field                                                ║
+║  🔍 มี "DUAL POWER PROTOCOL"?                                        ║
+║     → Yes = v1.4+                                                    ║
 ║                                                                       ║
-║  3. FEATURES CHECK (ถ้าหา version ไม่เจอ)                             ║
-║     → ตรวจ features → ประมาณ version                                  ║
+║  🔍 มี "Live Enlightenment" / "Universal Resume"?                    ║
+║     → Yes = v1.3+                                                    ║
+║                                                                       ║
+║  🔍 มี "MAP-Centric"?                                                ║
+║     → Yes = v1.3+                                                    ║
+║                                                                       ║
+║  🔍 มี "T tasks + E tasks"?                                          ║
+║     → Yes = v1.2+                                                    ║
+║                                                                       ║
+║  🔍 มี "ENLIGHTEN section"?                                          ║
+║     → Yes = v1.1+                                                    ║
+║                                                                       ║
+║  🔍 มีแค่ Basic Commands?                                            ║
+║     → v1.0                                                           ║
 ║                                                                       ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
-### 📊 VERSION MATRIX (ครบทุก version)
+### 📊 VERSION MATRIX (Reference Only)
 
-| Feature | v1.0 | v1.1 | v1.2 | v1.3 |
-|---------|------|------|------|------|
-| 4 Basic Commands | ✅ | ✅ | ✅ | ✅ |
-| Status Display | ❌ | ✅ | ✅ | ✅ |
-| Token Management | ❌ | ✅ | ✅ | ✅ |
-| Concept Modes | ❌ | ✅ | ✅ | ✅ |
-| Enlighten Mode | ❌ | ✅ | ✅ | ✅ |
-| Upgrade Command | ❌ | ✅ | ✅ | ✅ |
-| Multi-Agent (T+E) | ❌ | ❌ | ✅ | ✅ |
-| Unified Knowledge | ❌ | ❌ | ✅ | ✅ |
-| **MAP-Centric** | ❌ | ❌ | ❌ | ✅ |
-| **Live Enlightenment** | ❌ | ❌ | ❌ | ✅ |
-| **Universal Resume** | ❌ | ❌ | ❌ | ✅ |
-
-### 🔍 QUICK VERSION CHECK
-
-```
-╔═══════════════════════════════════════════════════════════════════════╗
-║  🔍 วิธีดู version เร็ว:                                              ║
-╠═══════════════════════════════════════════════════════════════════════╣
-║                                                                       ║
-║  1. ดูจาก CLAUDE.md title:                                           ║
-║     "Master Blueprint v7.0" → AXON v1.2                              ║
-║     "Master Blueprint v8.0" → AXON v1.3                              ║
-║                                                                       ║
-║  2. ดูจาก features:                                                   ║
-║     มี ENLIGHTEN section? → v1.1+                                    ║
-║     มี "T tasks + E tasks"? → v1.2+                                  ║
-║     มี "Live Enlightenment" / "Universal Resume"? → v1.3             ║
-║                                                                       ║
-║  3. ดูจาก MAP format:                                                 ║
-║     มี T001, T002 เท่านั้น? → v1.1                                   ║
-║     มี T001 + E001? → v1.2+                                          ║
-║     มี MAP-Centric flow? → v1.3                                      ║
-║                                                                       ║
-╚═══════════════════════════════════════════════════════════════════════╝
-```
+| Feature | v1.0 | v1.1 | v1.2 | v1.3 | v1.4 |
+|---------|------|------|------|------|------|
+| 4 Basic Commands | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Status Display | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Token Management | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Concept Modes | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Enlighten Mode | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Upgrade Command | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Multi-Agent (T+E) | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Unified Knowledge | ❌ | ❌ | ✅ | ✅ | ✅ |
+| MAP-Centric | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Live Enlightenment | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Universal Resume | ❌ | ❌ | ❌ | ✅ | ✅ |
+| **PARALLEL EXECUTION** | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **DUAL POWER PROTOCOL** | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **AUDIT AGENT** | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **A tasks (Audit)** | ❌ | ❌ | ❌ | ❌ | ✅ |
 
 ---
 
-## 📁 FILES TO UPDATE
-
-### CLAUDE.md Updates
+## 📁 SOURCE FILES
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
-║  📄 CLAUDE.md UPDATES (ตาม version ที่อัพเกรด)                        ║
+║  📁 SOURCE = axon-new repository                                      ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║                                                                       ║
-║  → v1.1 (จาก v1.0):                                                   ║
-║    • เพิ่ม STATUS DISPLAY section                                     ║
-║    • เพิ่ม TOKEN MANAGEMENT section                                   ║
-║    • เพิ่ม CONCEPT MODES                                              ║
-║    • เพิ่ม ENLIGHTEN + UPGRADE commands                               ║
+║  Latest CLAUDE.md:                                                    ║
+║     → axon-new/templates/CLAUDE.md                                   ║
 ║                                                                       ║
-║  → v1.2 (จาก v1.1):                                                   ║
-║    • เพิ่ม Multi-Agent Support (T tasks + E tasks)                   ║
-║    • เพิ่ม Unified Knowledge Base                                     ║
-║    • อัพเดท MAP format รองรับ E tasks                                ║
+║  Feature Reference:                                                   ║
+║     → axon-new/CLAUDE.md (root)                                      ║
 ║                                                                       ║
-║  → v1.3 (จาก v1.2):                                                   ║
-║    • เพิ่ม MAP-Centric Architecture section                          ║
-║    • เพิ่ม Live Enlightenment (ตรัสรู้ระหว่างทำ)                      ║
-║    • เพิ่ม Universal Resume protocol                                  ║
-║    • เพิ่ม UNIFIED FLOW diagram                                       ║
-║    • อัพเดท COMMAND MODE PROTOCOL                                     ║
+║  Commands:                                                            ║
+║     → axon-new/commands/*.md                                         ║
 ║                                                                       ║
-║  ❌ ไม่แตะ:                                                            ║
-║    • User's custom rules                                             ║
-║    • Project-specific settings                                       ║
-║    • Knowledge Base data                                             ║
-║                                                                       ║
-╚═══════════════════════════════════════════════════════════════════════╝
-```
-
-### .axon/config.md Updates
-
-```
-╔═══════════════════════════════════════════════════════════════════════╗
-║  📄 .axon/config.md UPDATES                                           ║
-╠═══════════════════════════════════════════════════════════════════════╣
-║                                                                       ║
-║  อัพเดท:                                                              ║
-║  • version: "1.3"  (ล่าสุด)                                           ║
-║  • last_upgrade: [timestamp]                                          ║
-║  • features_enabled: [list of v1.3 features]                         ║
-║                                                                       ║
-║  ไม่แตะ:                                                              ║
-║  • knowledge_base settings                                           ║
-║  • mcp_servers settings                                              ║
-║  • user preferences                                                  ║
+║  ⚠️ เวลา upgrade ต้องอ่านจาก source ไม่ใช่ hardcode!                  ║
 ║                                                                       ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
@@ -207,7 +180,7 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 ║                                                                       ║
 ║  upgrade.log format:                                                  ║
 ║  ```                                                                  ║
-║  Upgrade: [old_version] → v1.3                                       ║
+║  Upgrade: [old_version] → [new_version]                              ║
 ║  Date: [timestamp]                                                   ║
 ║  Files modified:                                                     ║
 ║    - CLAUDE.md                                                       ║
@@ -227,21 +200,21 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 ║  🔄 SMART MERGE (ไม่ทำลายของเดิม)                                     ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║                                                                       ║
-║  1. APPEND MODE (เพิ่มต่อท้าย)                                        ║
-║     → ใช้กับ sections ใหม่ที่ไม่มีในไฟล์เดิม                          ║
-║     → เพิ่มต่อท้ายโดยไม่แตะส่วนเดิม                                   ║
+║  1. COPY FROM SOURCE                                                  ║
+║     → Copy templates/CLAUDE.md จาก axon-new                         ║
+║     → นี่คือ latest version                                          ║
 ║                                                                       ║
-║  2. UPDATE MODE (แก้ไขเฉพาะจุด)                                       ║
-║     → ใช้กับ version number, commands table                          ║
-║     → แก้เฉพาะส่วนที่ต้องแก้                                         ║
+║  2. PRESERVE USER CONTENT                                             ║
+║     → หา sections ที่ user เพิ่มเอง                                   ║
+║     → Append กลับไปท้ายไฟล์ใหม่                                       ║
 ║                                                                       ║
-║  3. PRESERVE MODE (รักษาของเดิม)                                      ║
-║     → User customizations                                            ║
-║     → Project-specific rules                                         ║
-║     → Knowledge Base data                                            ║
+║  3. UPDATE CONFIG                                                     ║
+║     → อัพเดท .axon/config.md                                         ║
+║     → version = [detected from source]                               ║
+║     → last_upgrade = [timestamp]                                     ║
 ║                                                                       ║
 ║  ❌ NEVER DELETE:                                                      ║
-║     → User's custom code                                             ║
+║     → User's custom code/rules                                       ║
 ║     → AXON_KNOWLEDGE.md content                                      ║
 ║     → AXON_MAP.md tasks                                              ║
 ║     → AXON_STATE.md data                                             ║
@@ -255,44 +228,39 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 
 ```markdown
 ## Before Upgrade
-□ อ่าน version ปัจจุบัน
+□ อ่าน version จาก source (axon-new/CLAUDE.md)
+□ อ่าน version จาก user's CLAUDE.md
+□ เปรียบเทียบ → ต้อง upgrade หรือเปล่า?
 □ สร้าง backup
-□ แจ้ง user ว่าจะแก้ไขอะไร
 
 ## During Upgrade
-□ อัพเดท CLAUDE.md (เพิ่ม sections ใหม่)
-□ อัพเดท .axon/config.md (เพิ่ม version)
-□ เพิ่มไฟล์ใหม่ (ถ้ามี)
+□ Copy templates/CLAUDE.md จาก source
+□ รักษา user customizations
+□ อัพเดท .axon/config.md
 
 ## After Upgrade
 □ ตรวจสอบไฟล์ที่แก้ไข
-□ แจ้ง user ว่าแก้ไขอะไรบ้าง
+□ แสดง features ใหม่ที่ได้
 □ บันทึก upgrade.log
 ```
 
 ---
 
-## 📊 UPGRADE REPORT
+## 📊 UPGRADE REPORT FORMAT
 
 ```markdown
 ## 🔄 Upgrade Complete
 
-**From:** [detected_version]
-**To:** v1.3
+**From:** [detected from user's CLAUDE.md]
+**To:** [detected from source CLAUDE.md]
 **Date:** [timestamp]
 
 ### Files Modified:
-- ✅ CLAUDE.md - อัพเดทเป็น Master Blueprint v8.0
+- ✅ CLAUDE.md - อัพเดทจาก source
 - ✅ .axon/config.md - อัพเดท version field
 
-### 🆕 New Features in v1.3:
-
-| Feature | Description |
-|---------|-------------|
-| 🗺️ **MAP-Centric** | MAP เป็นศูนย์กลางของทุกอย่าง |
-| 🧘 **Live Enlightenment** | ตรัสรู้ระหว่างทำ → เพิ่ม tasks ได้ทันที |
-| 🔄 **Universal Resume** | กลับมาทำต่อจากทุก mode ด้วย /axon:ignite |
-| 📋 **Multi-Agent** | รองรับ T tasks (concept) + E tasks (enlighten) |
+### 🆕 New Features:
+[List features ที่มีใน source แต่ไม่มีใน user's version]
 
 ### 🚀 Quick Start After Upgrade:
 
@@ -326,18 +294,17 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 ║  🚨 ERROR HANDLING                                                    ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║                                                                       ║
-║  IF ไฟล์หาย:                                                          ║
-║     → สร้างใหม่ด้วย default values                                    ║
-║     → แจ้ง user                                                       ║
+║  IF source ไม่เจอ:                                                   ║
+║     → แจ้ง error "ไม่พบ axon-new repository"                         ║
+║     → หยุด upgrade                                                   ║
 ║                                                                       ║
-║  IF format ผิด:                                                       ║
-║     → พยายาม parse เท่าที่ได้                                         ║
-║     → backup ไฟล์เดิม                                                 ║
-║     → สร้างใหม่                                                       ║
+║  IF user's CLAUDE.md ไม่เจอ:                                         ║
+║     → ถือว่าเป็น fresh install                                       ║
+║     → Copy จาก source โดยตรง                                         ║
 ║                                                                       ║
-║  IF merge conflict:                                                   ║
-║     → ถาม user ว่าจะเลือกอันไหน                                       ║
-║     → หรือ keep both                                                 ║
+║  IF backup failed:                                                   ║
+║     → แจ้ง warning แต่ไม่หยุด                                        ║
+║     → ถาม user ว่าจะดำเนินการต่อไหม                                  ║
 ║                                                                       ║
 ║  IF upgrade failed:                                                   ║
 ║     → Rollback จาก backup                                            ║
@@ -353,37 +320,42 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 
 ```
 1. แสดง Status
-   ┌──────────────────────────────────────────────┐
-   │ 🤖 Opus 4.5 | 🔄 UPGRADE | Checking...       │
-   └──────────────────────────────────────────────┘
+   ┌──────────────────────────────────────────────────────────┐
+   │ 🤖 Opus 4.5 | 🔄 UPGRADE | Checking...                   │
+   └──────────────────────────────────────────────────────────┘
 
-2. ตรวจสอบ version
-   → อ่าน CLAUDE.md (หา Master Blueprint vX.X)
-   → อ่าน .axon/config.md (หา version field)
-   → ถ้าหาไม่เจอ → ตรวจ features → ประมาณ version
-   → เปรียบเทียบกับ v1.3 (ล่าสุด)
+2. อ่าน LATEST VERSION จาก source
+   → Read axon-new/CLAUDE.md หรือ axon-new/templates/CLAUDE.md
+   → หา "Master Blueprint vX.X"
+   → หา features (AUDIT AGENT, DUAL POWER, etc.)
 
-3. แจ้ง user
-   "พบว่าใช้ AXON [detected_version] จะอัพเกรดเป็น v1.3"
-   "จะแก้ไข: CLAUDE.md, .axon/config.md"
-   [แสดง features ใหม่ที่จะได้]
+3. อ่าน CURRENT VERSION จาก user
+   → Read user's CLAUDE.md
+   → หา "Master Blueprint vX.X"
+   → ถ้าหาไม่เจอ → detect จาก features
 
-4. Backup
+4. เปรียบเทียบ
+   → IF current == latest:
+        แสดง "✅ คุณใช้ version ล่าสุดแล้ว!"
+        แสดง features ที่มี
+        จบ
+   → IF current < latest:
+        แสดง features ใหม่ที่จะได้
+        proceed to upgrade
+
+5. Backup (if upgrading)
    → สร้าง .axon/backup/[timestamp]/
    → copy ไฟล์ที่จะแก้
 
-5. Upgrade
-   → อัพเดท CLAUDE.md → Master Blueprint v8.0
-   → อัพเดท .axon/config.md → version: "1.3"
-   → เพิ่ม sections ใหม่ตาม version gap
+6. Upgrade
+   → Copy CLAUDE.md จาก source
+   → รักษา user customizations
+   → อัพเดท .axon/config.md
 
-6. Verify
+7. Verify + Report
    → ตรวจสอบไฟล์
-   → แสดง report
-
-7. Done
-   "✅ Upgrade เสร็จสมบูรณ์!"
-   [แสดง Quick Start หลัง upgrade]
+   → แสดง upgrade report
+   → "✅ Upgrade เสร็จสมบูรณ์!"
 ```
 
 ---
@@ -392,24 +364,66 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
-║  ⚠️ NOTES สำหรับ UPGRADE                                              ║
+║  ⚠️ CRITICAL: DYNAMIC VERSION SYSTEM                                  ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║                                                                       ║
-║  1. ถ้าเป็น v1.3 อยู่แล้ว:                                            ║
-║     → แจ้ง "คุณใช้ version ล่าสุดแล้ว!"                               ║
-║     → ไม่ต้องทำอะไร                                                   ║
+║  ❌ ห้าม HARDCODE version ในไฟล์นี้                                   ║
 ║                                                                       ║
-║  2. ถ้าหา version ไม่เจอเลย:                                          ║
-║     → ถือว่าเป็น v1.0                                                 ║
-║     → Upgrade เต็ม features                                          ║
+║  ✅ ต้อง READ version จาก:                                            ║
+║     • Source: axon-new/CLAUDE.md (latest)                            ║
+║     • User: user's CLAUDE.md (current)                               ║
 ║                                                                       ║
-║  3. ถ้า CLAUDE.md มี custom content:                                  ║
-║     → รักษาไว้ ไม่ลบ                                                   ║
-║     → เพิ่ม sections ใหม่ต่อท้าย                                      ║
+║  🔄 เมื่อมี version ใหม่:                                             ║
+║     • อัพเดท CLAUDE.md ใน axon-new                                   ║
+║     • อัพเดท templates/CLAUDE.md ใน axon-new                         ║
+║     • ไม่ต้องแก้ไฟล์ upgrade.md นี้!                                  ║
 ║                                                                       ║
-║  4. Upgrade ข้าม version ได้:                                         ║
-║     → v1.0 → v1.3 โดยตรง ✅                                           ║
-║     → ไม่ต้องอัพทีละ version                                         ║
+║  📋 VERSION DETECTION PRIORITY:                                       ║
+║     1. หา "Master Blueprint vX.X" ใน title                          ║
+║     2. ถ้าหาไม่เจอ → detect จาก features                             ║
+║     3. ถ้าหาไม่เจอเลย → ถือว่า v1.0                                  ║
 ║                                                                       ║
 ╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
+## 🔍 FEATURE DETECTION CODE (Pseudo)
+
+```
+function detectVersion(claudeContent):
+    # 1. Try to find version in title
+    if "Master Blueprint v8.0" in title:
+        # Check for v1.4 features
+        if "AUDIT AGENT PROTOCOL" in content:
+            return "v1.4"
+        else:
+            return "v1.3"
+
+    if "Master Blueprint v7.0" in title:
+        return "v1.2"
+
+    # 2. Feature-based detection
+    if "AUDIT AGENT PROTOCOL" in content:
+        return "v1.4"
+
+    if "DUAL POWER PROTOCOL" in content:
+        return "v1.4"
+
+    if "PARALLEL EXECUTION RULE" in content:
+        return "v1.4"
+
+    if "Live Enlightenment" in content:
+        return "v1.3"
+
+    if "MAP-Centric" in content:
+        return "v1.3"
+
+    if "T tasks + E tasks" in content:
+        return "v1.2"
+
+    if "ENLIGHTEN" in content:
+        return "v1.1"
+
+    return "v1.0"
 ```
