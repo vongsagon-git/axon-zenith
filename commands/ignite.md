@@ -222,6 +222,145 @@ description: "Start Zenith Loop (Infinite Mode) - ทำงานไม่หย
 
 ---
 
+### 🛡️ CODE FORTRESS FRAMEWORK (สำหรับงานเขียนโค้ด)
+
+**เมื่อเขียนโค้ด ต้องถามตัวเองทุกมิติ: "ถ้าเกิดแบบนี้ล่ะ?"**
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  🏰 CODE FORTRESS: ป้องกันทุกมิติ                                      ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  🐛 BUG PREVENTION:                                                   ║
+║     • ถ้า input เป็น null/undefined?                                  ║
+║     • ถ้า input เป็น type ผิด?                                        ║
+║     • ถ้า array ว่าง?                                                 ║
+║     • ถ้าตัวเลขติดลบ / overflow?                                      ║
+║     • ถ้า string ยาวเกินไป / มี special chars?                        ║
+║     • ถ้า race condition?                                             ║
+║     • ถ้า async ทำงานไม่ตามลำดับ?                                     ║
+║                                                                       ║
+║  🔒 SECURITY (HACK PREVENTION):                                       ║
+║     • SQL Injection? → Parameterized queries                          ║
+║     • XSS? → Sanitize output                                          ║
+║     • CSRF? → Token verification                                      ║
+║     • Auth bypass? → Proper session management                        ║
+║     • Privilege escalation? → Role-based access                       ║
+║     • Data exposure? → Proper encryption                              ║
+║     • Path traversal? → Input validation                              ║
+║                                                                       ║
+║  🌊 DDOS PREVENTION:                                                  ║
+║     • Rate limiting ใส่หรือยัง?                                       ║
+║     • Request size limit?                                             ║
+║     • Timeout ทุก operation?                                          ║
+║     • Circuit breaker pattern?                                        ║
+║     • Queue overflow protection?                                      ║
+║                                                                       ║
+║  👤 HUMAN ERROR:                                                      ║
+║     • ถ้า user กด submit ซ้ำๆ?                                        ║
+║     • ถ้า user ใส่ข้อมูลผิด format?                                   ║
+║     • ถ้า user ทำ action ผิดลำดับ?                                    ║
+║     • ถ้า user ปิด browser กลางทาง?                                   ║
+║     • ถ้า user มี connection ช้า/ไม่เสถียร?                           ║
+║                                                                       ║
+║  🌍 REAL WORLD ERRORS:                                                ║
+║     • ถ้า database down?                                              ║
+║     • ถ้า external API timeout?                                       ║
+║     • ถ้า disk full?                                                  ║
+║     • ถ้า memory leak?                                                ║
+║     • ถ้า network partition?                                          ║
+║     • ถ้า server restart กลางทาง?                                     ║
+║     • ถ้า timezone ต่างกัน?                                           ║
+║     • ถ้า daylight saving?                                            ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+**📋 Code Defense Checklist (ต้องตอบทุกข้อ!):**
+
+| Category | คำถาม | ป้องกันแล้ว? |
+|----------|-------|-------------|
+| **Input** | Validate ทุก input หรือยัง? | ☐ |
+| **Output** | Sanitize ทุก output หรือยัง? | ☐ |
+| **Auth** | ตรวจสอบ permission ทุกจุดหรือยัง? | ☐ |
+| **Error** | Handle ทุก error case หรือยัง? | ☐ |
+| **Timeout** | ใส่ timeout ทุก async operation หรือยัง? | ☐ |
+| **Rate Limit** | จำกัด request rate หรือยัง? | ☐ |
+| **Logging** | Log เพียงพอสำหรับ debug หรือยัง? | ☐ |
+| **Recovery** | ระบบกลับมาทำงานได้เองหรือยัง? | ☐ |
+
+**🔄 "What If" Loop (ถามจนกว่าจะหาจุดบอดไม่เจอ):**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  สำหรับทุก function/endpoint ที่เขียน:                           │
+│                                                                 │
+│  LOOP:                                                          │
+│    1. "ถ้า input เป็น X ล่ะ?" → มี handler ไหม?                 │
+│    2. "ถ้าระหว่างทำ Y ล้มเหลวล่ะ?" → recover ได้ไหม?           │
+│    3. "ถ้า attacker ส่ง Z มาล่ะ?" → block ได้ไหม?              │
+│    4. "ถ้า user ทำ W ผิดล่ะ?" → guide ให้ถูกได้ไหม?            │
+│    5. "ถ้า infra เกิด V ล่ะ?" → graceful degrade ได้ไหม?       │
+│                                                                 │
+│  ถ้าตอบ "ไม่" แม้แต่ข้อเดียว:                                    │
+│    → แก้โค้ด                                                    │
+│    → Loop อีกครั้ง                                              │
+│                                                                 │
+│  ถ้าตอบ "ได้" ทุกข้อ:                                           │
+│    → คิด scenario ใหม่ที่ยากขึ้น                                 │
+│    → Loop อีกครั้ง                                              │
+│                                                                 │
+│  ⚠️ หยุดได้เมื่อ: คิด scenario ใหม่ไม่ออกจริงๆ                   │
+│  ✅ แล้วสร้าง Task: "หา edge case ใหม่จากมุมมอง [X]"            │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**🎯 Defense Layers (ป้องกันหลายชั้น):**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  Layer 1: INPUT VALIDATION                                      │
+│  ├── Type checking                                              │
+│  ├── Range validation                                           │
+│  ├── Format validation                                          │
+│  └── Sanitization                                               │
+│                                                                 │
+│  Layer 2: BUSINESS LOGIC                                        │
+│  ├── Permission checks                                          │
+│  ├── State validation                                           │
+│  ├── Rate limiting                                              │
+│  └── Idempotency                                                │
+│                                                                 │
+│  Layer 3: DATA ACCESS                                           │
+│  ├── Parameterized queries                                      │
+│  ├── Connection pooling                                         │
+│  ├── Retry logic                                                │
+│  └── Transaction management                                     │
+│                                                                 │
+│  Layer 4: ERROR HANDLING                                        │
+│  ├── Graceful degradation                                       │
+│  ├── Circuit breaker                                            │
+│  ├── Fallback responses                                         │
+│  └── Error logging                                              │
+│                                                                 │
+│  Layer 5: MONITORING                                            │
+│  ├── Health checks                                              │
+│  ├── Alerting                                                   │
+│  ├── Metrics                                                    │
+│  └── Audit logs                                                 │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**⚠️ ห้ามปิด Task โค้ดจนกว่าจะ:**
+- ตอบ "What If" ทุกข้อได้
+- กรอก Defense Checklist ครบ
+- มี Defense ทุก Layer ที่เกี่ยวข้อง
+- **ถ้ายังคิด scenario ที่พังได้ = ยังไม่เสร็จ!**
+
+---
+
 ## The Zenith Loop
 
 ### 1. STATE SYNC
