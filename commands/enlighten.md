@@ -153,6 +153,136 @@ Topic: "Best practices สำหรับ React state management"
 
 ---
 
+## 🔍 AUDIT WITH DEDICATED AGENT (ขุดลึก verify!)
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  🔍 AUDIT = ส่งต่อให้ Agent ขุดลึก Background!                        ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  หลัง SYNTHESIZE → ประเมิน Confidence → พบจุดสงสัย → Spawn Agent!    ║
+║                                                                       ║
+║  📊 CONFIDENCE EVALUATION (4 คำถาม):                                  ║
+║     1. "ที่สังเคราะห์มา ถูกจริงไหม?" (0-100%)                         ║
+║     2. "มี bias ซ่อนอยู่ไหม?" (0-100%)                                ║
+║     3. "Edge cases ครบไหม?" (0-100%)                                  ║
+║     4. "First principles ถูกไหม?" (0-100%)                            ║
+║                                                                       ║
+║  📋 DECISION:                                                         ║
+║     • Average Score >= 90% → ผ่าน! ไม่ต้อง audit                     ║
+║     • Average Score < 90% → ต้อง Spawn Audit Agent!                  ║
+║                                                                       ║
+║  🤖 SPAWN AUDIT AGENT:                                                ║
+║                                                                       ║
+║     Task tool:                                                        ║
+║     - subagent_type: "general-purpose"                                ║
+║     - model: "haiku"                                                  ║
+║     - run_in_background: true                                         ║
+║     - prompt: "                                                       ║
+║         🔍 AUDIT TASK: [A00X]                                         ║
+║         Topic: [topic]                                                ║
+║         จุดที่สงสัย: [concern]                                        ║
+║                                                                       ║
+║         Mission:                                                      ║
+║         1. ขุดลึก verify [concern]                                    ║
+║         2. WebSearch หา evidence ยืนยัน/หักล้าง                       ║
+║         3. วิเคราะห์ bias, edge cases, first principles              ║
+║         4. สรุปผลพร้อม confidence score                               ║
+║                                                                       ║
+║         Output Format:                                                ║
+║         - VERIFIED: [true/false]                                      ║
+║         - EVIDENCE: [sources + summary]                               ║
+║         - CONFIDENCE: [0-100%]                                        ║
+║         - NEW_CONCERNS: [ถ้ามี]                                       ║
+║       "                                                               ║
+║                                                                       ║
+║  ⚡ AFTER SPAWN:                                                       ║
+║     • Main Agent ทำงานต่อทันที! (ไม่รอ)                               ║
+║     • ทำ task ถัดไปใน MAP                                             ║
+║     • ตรวจผล audit เมื่อกลับมา                                        ║
+║                                                                       ║
+║  📥 WHEN AUDIT RETURNS:                                               ║
+║     • อัพเดท AXON_KNOWLEDGE.md                                        ║
+║     • Mark [x] AUDIT TASK ใน MAP                                      ║
+║     • IF NEW_CONCERNS → สร้าง AUDIT TASK ใหม่ → Spawn อีก            ║
+║     • ... วน ∞ จนกว่าจะ confident 100% ...                           ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+### 📋 AUDIT TASK ID FORMAT
+
+| Mode | ID Format | ตัวอย่าง |
+|------|-----------|---------|
+| CONCEPT | T001, T002... | Tasks จากการวางแผน |
+| ENLIGHTEN | E001, E002... | Tasks จากการตรัสรู้ |
+| **AUDIT** | **A001, A002...** | **Tasks จากการ audit** |
+
+**MAP สามารถมีทั้ง T, E, และ A tasks ผสมกันได้!**
+
+### 🔄 EXAMPLE: FULL AUDIT FLOW
+
+```
+Topic: "ควรใช้ Zustand หรือ Redux?"
+
+🧠 Claude รู้:
+   - Redux mature, Redux devtools ดี
+   - Zustand simple, less boilerplate
+
+🔍 Search (Parallel):
+   - [State of JS 2024]
+   - [npm trends]
+   - [Reddit discussions]
+
+🔬 SYNTHESIZE:
+   "สำหรับ medium scale project...
+    ควรใช้ Zustand เพราะ simpler + devtools พอใช้ได้"
+
+🔍 AUDIT EVALUATION:
+   ❓ "Zustand devtools ดีจริงไหม?" → Score 70%
+   ❓ "Medium scale = กี่ state slices?" → Score 60%
+   ❓ "Team familiar กับ paradigm ไหน?" → Score 50%
+
+   Average: 60% < 90% → ต้อง AUDIT!
+
+📋 CREATE AUDIT TASKS:
+   - [A001] Audit: compare Zustand vs Redux devtools features
+   - [A002] Audit: define medium scale threshold
+   - [A003] Audit: assess team's state management experience
+
+🤖 SPAWN AUDIT AGENTS (Background):
+   Task(prompt="Audit A001...", model="haiku", run_in_background=true)
+   Task(prompt="Audit A002...", model="haiku", run_in_background=true)
+   Task(prompt="Audit A003...", model="haiku", run_in_background=true)
+
+⚡ MAIN AGENT ทำงานต่อทันที!
+   - ทำ task อื่นใน MAP
+   - ไม่รอผล audit
+
+📥 AUDIT AGENTS RETURN:
+   A001: "Zustand devtools มี Redux-devtools extension แล้ว" → 95%
+   A002: "Medium scale = 10-30 state slices" → 90%
+   A003: "Team มี Redux experience, ไม่คุ้น Zustand" → 85%
+
+   NEW_CONCERNS: "Team learning curve สำหรับ Zustand?"
+
+📋 CREATE NEW AUDIT TASK:
+   - [A004] Audit: Zustand learning curve for Redux developers
+
+🤖 SPAWN AUDIT AGENT อีก...
+   ... วน ∞ จนกว่าจะ confident ...
+
+💎 FINAL VERIFIED OUTPUT:
+   "สำหรับ team นี้ที่มี Redux experience...
+    + project มี 15 state slices...
+    ควรใช้ Redux Toolkit เพราะ:
+    1. Team คุ้นเคยอยู่แล้ว (learning curve ต่ำกว่า)
+    2. DevTools ดีกว่าสำหรับ debugging
+    3. Scale ได้ดีกว่าในระยะยาว"
+```
+
+---
+
 ## 🗺️ MAP INTEGRATION PROTOCOL (สร้าง MAP ขณะทำ!)
 
 ```

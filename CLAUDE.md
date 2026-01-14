@@ -105,6 +105,72 @@
 
 ---
 
+## 🤖 AUDIT AGENT PROTOCOL (ส่งต่อให้ Agent ขุดลึก!)
+
+```
+╔═══════════════════════════════════════════════════════════════╗
+║  🔍 AUDIT = ส่งต่อให้ Agent ทำ Background!                    ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  🧠 หลัง SYNTHESIZE ทุกครั้ง → ต้อง AUDIT!                    ║
+║                                                               ║
+║  📋 AUDIT QUESTIONS (4 คำถาม):                                ║
+║     1. "ที่สังเคราะห์มา ถูกจริงไหม?"                          ║
+║     2. "มี bias ซ่อนอยู่ไหม?"                                 ║
+║     3. "มี edge case ที่ยังไม่ได้คิดไหม?"                     ║
+║     4. "First principles ถูกต้องไหม?"                         ║
+║                                                               ║
+║  📊 CONFIDENCE SCORE:                                         ║
+║     • 90-100% → ผ่าน ไม่ต้อง audit                           ║
+║     • < 90% → ต้อง spawn AUDIT AGENT!                        ║
+║                                                               ║
+║  🔄 AUDIT FLOW:                                               ║
+║                                                               ║
+║  Main Agent                    Audit Agent (Background)       ║
+║  ───────────                   ─────────────────────────       ║
+║  1. SYNTHESIZE output          │                              ║
+║  2. พบจุดสงสัย (< 90%)         │                              ║
+║  3. สร้าง [A00X] AUDIT TASK    │                              ║
+║  4. Spawn Audit Agent ────────►│ รับ AUDIT TASK              ║
+║  5. ทำงานต่อทันที!             │ ขุดลึก verify               ║
+║  6. ทำ task อื่นใน MAP         │ WebSearch + analyze         ║
+║  7. ...                        │ ...                         ║
+║  8. รับผล audit ◄──────────────│ return verified output      ║
+║  9. อัพเดท KNOWLEDGE           │                              ║
+║ 10. สร้าง AUDIT TASK ใหม่      │                              ║
+║     (ถ้ายังมีจุดสงสัย) ───────►│ spawn อีก                   ║
+║     ... วน ∞ ...               │ ... วน ∞ ...                ║
+║                                                               ║
+║  📋 AUDIT TASK FORMAT:                                        ║
+║     [A001] Audit: [topic] - [จุดที่สงสัย]                     ║
+║     ตัวอย่าง:                                                 ║
+║     - [A001] Audit: verify Zustand performance claims         ║
+║     - [A002] Audit: check Redux devtools comparison           ║
+║                                                               ║
+║  🤖 SPAWN AUDIT AGENT:                                        ║
+║     Task tool:                                                ║
+║     - subagent_type: "general-purpose"                        ║
+║     - model: "haiku" (เร็ว + ประหยัด)                         ║
+║     - run_in_background: true                                 ║
+║     - prompt: ขุดลึก verify [จุดที่สงสัย]                     ║
+║                                                               ║
+║  ⚡ KEY PRINCIPLE:                                             ║
+║     • Main Agent = Breadth First (กว้าง)                      ║
+║     • Audit Agent = Depth First (ลึก)                         ║
+║     • KNOWLEDGE โตทั้ง 2 ทาง!                                  ║
+║                                                               ║
+║  📋 TASK ID FORMAT:                                           ║
+║     | Mode | ID | ตัวอย่าง |                                  ║
+║     |------|----|---------|                                   ║
+║     | CONCEPT | T001, T002... | วางแผน |                      ║
+║     | ENLIGHTEN | E001, E002... | ตรัสรู้ |                   ║
+║     | AUDIT | A001, A002... | ตรวจสอบ |                       ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+```
+
+---
+
 ## 🎮 COMMAND MODE PROTOCOL
 
 ```

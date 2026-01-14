@@ -560,6 +560,128 @@ Task(prompt: "Search for Z in tests/", model: "haiku")
 
 ---
 
+### 🔍 BACKGROUND AUDIT CHECK (ตรวจผล Audit Agent)
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  🔍 BACKGROUND AUDIT CHECK - ทุก iteration ต้องตรวจ!                  ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  🔄 IGNITE LOOP + AUDIT INTEGRATION:                                  ║
+║                                                                       ║
+║  ทุก iteration ของ IGNITE_LOOP ต้อง:                                  ║
+║                                                                       ║
+║  1️⃣ CHECK PENDING AUDIT AGENTS                                        ║
+║     • ใช้ TaskOutput tool                                             ║
+║     • block: false (non-blocking)                                     ║
+║     • ถ้ายังไม่เสร็จ → ทำงานต่อ                                       ║
+║                                                                       ║
+║  2️⃣ IF มีผล AUDIT กลับมา:                                             ║
+║     • อ่านผลลัพธ์ (VERIFIED, EVIDENCE, CONFIDENCE, NEW_CONCERNS)     ║
+║     • อัพเดท AXON_KNOWLEDGE.md                                        ║
+║     • Mark [x] AUDIT TASK ใน MAP                                      ║
+║                                                                       ║
+║  3️⃣ IF มี NEW_CONCERNS:                                               ║
+║     • สร้าง AUDIT TASK ใหม่เข้า MAP                                   ║
+║     • Spawn Audit Agent ใหม่ (Background)                             ║
+║     • ... วน ∞ จนกว่าจะ confident ...                                ║
+║                                                                       ║
+║  4️⃣ CONTINUE MAIN WORK                                                ║
+║     • ไม่ block ถ้ายังไม่มีผล                                         ║
+║     • ทำ task ถัดไปใน MAP                                             ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+### 📋 AUDIT TASK ID FORMAT (สำหรับ IGNITE)
+
+| Mode | ID Format | ตัวอย่าง |
+|------|-----------|---------|
+| CONCEPT | T001, T002... | Tasks จากการวางแผน |
+| ENLIGHTEN | E001, E002... | Tasks จากการตรัสรู้ |
+| **AUDIT** | **A001, A002...** | **Tasks จากการ audit** |
+
+**IGNITE รองรับทั้ง T, E, และ A tasks!**
+
+### 🔄 IGNITE LOOP WITH AUDIT CHECK
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  🔄 MODIFIED IGNITE_LOOP (v1.4 - With Audit)                          ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  WHILE (tasks [ ] exist OR audit agents running):                     ║
+║                                                                       ║
+║     ┌─────────────────────────────────────────────────────────────┐  ║
+║     │ STEP 0: CHECK BACKGROUND AUDITS (non-blocking)              │  ║
+║     │ • TaskOutput(block=false) สำหรับแต่ละ audit agent          │  ║
+║     │ • IF มีผล → process → update KNOWLEDGE → mark done         │  ║
+║     │ • IF NEW_CONCERNS → spawn new audit agent                   │  ║
+║     └─────────────────────────────────────────────────────────────┘  ║
+║                          ↓                                            ║
+║     ┌─────────────────────────────────────────────────────────────┐  ║
+║     │ STEP 1: PICK NEXT TASK                                      │  ║
+║     │ • อ่าน AXON_MAP.md                                          │  ║
+║     │ • เลือก [ ] task ถัดไป (T/E/A)                              │  ║
+║     └─────────────────────────────────────────────────────────────┘  ║
+║                          ↓                                            ║
+║     ┌─────────────────────────────────────────────────────────────┐  ║
+║     │ STEP 2: EXECUTE WITH DUAL POWER                             │  ║
+║     │ • Claude Knowledge + Search (Parallel)                      │  ║
+║     │ • Compare → Synthesize → Output                             │  ║
+║     └─────────────────────────────────────────────────────────────┘  ║
+║                          ↓                                            ║
+║     ┌─────────────────────────────────────────────────────────────┐  ║
+║     │ STEP 3: AUDIT EVALUATION                                    │  ║
+║     │ • ประเมิน 4 คำถาม (ถูกไหม, bias, edge case, first principle)│  ║
+║     │ • IF score < 90% → Spawn Audit Agent (Background)           │  ║
+║     │ • Main Agent ทำงานต่อทันที (ไม่รอ)                          │  ║
+║     └─────────────────────────────────────────────────────────────┘  ║
+║                          ↓                                            ║
+║     ┌─────────────────────────────────────────────────────────────┐  ║
+║     │ STEP 4: UPDATE & LOOP                                       │  ║
+║     │ • Mark [x] task เสร็จ                                       │  ║
+║     │ • อัพเดท KNOWLEDGE                                          │  ║
+║     │ • อัพเดท STATE                                              │  ║
+║     │ • Loop กลับ STEP 0                                          │  ║
+║     └─────────────────────────────────────────────────────────────┘  ║
+║                                                                       ║
+║  END WHILE                                                            ║
+║                                                                       ║
+║  🛑 STOP CONDITIONS:                                                   ║
+║     • User พิมพ์ "หยุด"                                              ║
+║     • ติด API limit                                                   ║
+║     • (ไม่มีเงื่อนไขอื่น - วน ∞)                                     ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+### ⚡ KEY PRINCIPLES
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  ⚡ AUDIT AGENT = DEPTH | MAIN AGENT = BREADTH                        ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  Main Agent (Breadth First):                                          ║
+║  • ทำ MAP tasks ไปเรื่อยๆ (T/E/A)                                     ║
+║  • ไม่ติดอยู่กับ audit                                                ║
+║  • เพิ่มความรู้กว้าง                                                  ║
+║                                                                       ║
+║  Audit Agent (Depth First):                                           ║
+║  • ขุดลึก verify ทุกจุดสงสัย                                          ║
+║  • ทำ background ไม่รบกวน                                             ║
+║  • เพิ่มความรู้ลึก                                                    ║
+║                                                                       ║
+║  KNOWLEDGE โตทั้ง 2 ทาง!                                               ║
+║  • กว้างจาก Main Agent                                                ║
+║  • ลึกจาก Audit Agent                                                 ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
 ### 🔬 RESEARCH DEPTH FRAMEWORK (สำหรับงานวิจัย/สืบค้น)
 
 ```
