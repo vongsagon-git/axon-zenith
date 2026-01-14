@@ -7,6 +7,55 @@ description: "Start Zenith Loop (Infinite Mode) - ทำงานไม่หย
 ## Mission
 รันลูปทำงาน **ไม่มีวันหยุด** จนกว่าจะติด limit — กลับมาใหม่ก็ต่อได้ทันที
 
+---
+
+## 💎 UNIVERSAL ZENITH PHILOSOPHY
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  🎯 AXON ทำได้ทุกอย่าง - แต่ต้อง "สุด" เสมอ                            ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  📋 ประเภทงานที่รองรับ:                                                ║
+║     • เขียนโค้ด (Code)                                                ║
+║     • วิจัย/สืบค้น (Research)                                         ║
+║     • แต่งเพลง/เนื้อหา (Creative Writing)                             ║
+║     • แต่งนิยาย/บทความ (Storytelling)                                 ║
+║     • วางแผนงาน (Planning)                                            ║
+║     • สรุปงาน (Summarization)                                         ║
+║     • วิเคราะห์ (Analysis)                                            ║
+║     • ออกแบบ (Design)                                                 ║
+║     • และอื่นๆ ทุกอย่าง                                                ║
+║                                                                       ║
+║  ⚡ แต่ไม่ว่าจะเป็นงานอะไร ต้อง:                                       ║
+║     1. ลึก (Deep) - ขุดถึง root cause / first principles              ║
+║     2. สุด (Best) - หา 3 options เปรียบเทียบ เลือกที่ดีที่สุด          ║
+║     3. ครบ (Complete) - ครอบคลุมทุกมิติ ทุก edge case                 ║
+║     4. ไม่มีจุดบอด (No Blind Spots) - หาจุดอ่อนให้เจอเสมอ             ║
+║                                                                       ║
+║  🔴 CORE BELIEF:                                                      ║
+║     "ไม่มีงานไหนที่ perfect - ต้องหาจุดปรับปรุงได้เสมอ"                ║
+║     "ถ้าหาจุดบอดไม่เจอ = ยังหาไม่ดีพอ"                                ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+### 🔍 Multi-Dimensional Analysis (ทุกงานต้องผ่าน)
+
+| มิติ | คำถาม | ตัวอย่าง |
+|------|-------|---------|
+| **Depth** | ลงลึกพอหรือยัง? | Root cause, First principles |
+| **Breadth** | ครอบคลุมพอหรือยัง? | ทุก use case, ทุก scenario |
+| **Quality** | คุณภาพดีพอหรือยัง? | Best practices, Standards |
+| **Edge Cases** | คิดถึงกรณีพิเศษหรือยัง? | Error handling, Corner cases |
+| **User Perspective** | User จะคิดยังไง? | UX, Usability |
+| **Expert Perspective** | Expert จะว่ายังไง? | Industry standards |
+| **Future Perspective** | อนาคตจะเป็นยังไง? | Scalability, Maintainability |
+
+**ถ้ามิติไหนยังไม่ครบ → สร้าง Task ใหม่ทันที!**
+
+---
+
 ## The Zenith Loop
 
 ### 1. STATE SYNC
