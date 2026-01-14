@@ -11,14 +11,18 @@
 
 **Windows (PowerShell):**
 ```powershell
-git clone https://github.com/vongsagon-git/axon-zenith.git "$env:USERPROFILE\.claude\commands\axon-zenith"
-xcopy /E /I /Y "$env:USERPROFILE\.claude\commands\axon-zenith\commands\*" "$env:USERPROFILE\.claude\commands\axon\"
+git clone https://github.com/vongsagon-git/axon-zenith.git "$env:USERPROFILE\.claude\temp-axon"
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\commands\axon"
+Copy-Item "$env:USERPROFILE\.claude\temp-axon\commands\*.md" "$env:USERPROFILE\.claude\commands\axon\"
+Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\temp-axon"
 ```
 
 **macOS / Linux:**
 ```bash
-git clone https://github.com/vongsagon-git/axon-zenith.git ~/.claude/commands/axon-zenith
-cp -r ~/.claude/commands/axon-zenith/commands/* ~/.claude/commands/axon/
+git clone https://github.com/vongsagon-git/axon-zenith.git /tmp/axon-zenith
+mkdir -p ~/.claude/commands/axon
+cp /tmp/axon-zenith/commands/*.md ~/.claude/commands/axon/
+rm -rf /tmp/axon-zenith
 ```
 
 > หลังติดตั้ง พิมพ์ `/axon` จะเห็น commands ทั้ง 4 ตัว
