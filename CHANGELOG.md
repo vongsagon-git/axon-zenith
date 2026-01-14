@@ -6,6 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.3.0] - MAP-Centric + Live Enlightenment
+
+### Added
+- **MAP-Centric Design** - ทุกอย่างมุ่งสู่ MAP เป็นศูนย์กลาง
+- **Live Enlightenment ใน IGNITE** - ตรัสรู้ระหว่างทำงาน + เพิ่ม tasks ได้
+- **ENLIGHTEN + MAP Integration** - ตรัสรู้ไป สร้าง MAP ไป ทำไปพร้อมกัน
+- **Universal Resume** - ใช้ `/axon:ignite` กลับมาทำต่อได้จากทุก mode
+- **Task ID System** - T00X จาก CONCEPT, E00X จาก ENLIGHTEN
+
+### Changed
+- **IGNITE** - เพิ่ม Live Enlightenment protocol (section 4.2)
+- **IGNITE** - เพิ่ม Universal Resume protocol (section 2)
+- **ENLIGHTEN** - เพิ่ม MAP Integration (สร้าง/เพิ่ม task เข้า MAP ทันที)
+- **ENLIGHTEN** - Flow ใหม่: ตรัสรู้ → เพิ่ม MAP → ทำเลย → วน
+- **Status Display** - แสดง MAP tasks count + progress
+
+### Unified Flow
+```
+2 ทางเริ่มต้น:
+1. มีแผน: CONCEPT → IGNITE
+2. ไม่มีแผน: ENLIGHTEN (ตรัสรู้ไป ทำไป)
+
+Resume: ใช้ /axon:ignite กลับมาทำต่อได้เสมอ
+```
+
+---
+
 ## [1.2.0] - Multi-Agent Support
 
 ### Added
@@ -62,4 +89,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 | 1.0.0 | Core | 4 Commands (setup, concept, ignite, mcp) |
 | 1.1.0 | Enlighten | +2 Commands (enlighten, upgrade) + Status Display |
 | 1.2.0 | Multi-Agent | Boss-Worker Pattern + Unified Knowledge |
+| 1.3.0 | MAP-Centric | Live Enlightenment + Universal Resume |
 | 2.0.0 | (Planned) | Vector Memory |

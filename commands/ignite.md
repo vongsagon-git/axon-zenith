@@ -1453,14 +1453,41 @@ READ: .axon/mcp.md (MCP tools ที่ใช้ได้)
 
 ### 2. TASK SELECTION (Resume-Aware)
 
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║  🔄 UNIVERSAL RESUME: กลับมาทำต่อได้จากทุก mode                    ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║  ไม่ว่าจะเริ่มจาก CONCEPT, ENLIGHTEN หรือ IGNITE                  ║
+║  → กลับมาใช้ /axon:ignite ทำต่อได้เสมอ                            ║
+║                                                                   ║
+║  📋 IGNITE จะ:                                                    ║
+║     1. อ่าน STATE → หา resume point                               ║
+║     2. อ่าน MAP → หา tasks ที่ค้าง                                ║
+║     3. ถาม user ว่าจะทำต่อไหม                                     ║
+║     4. ทำต่อ + ตรัสรู้ได้ + เพิ่ม tasks ได้                       ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+```
+
 **เช็ค Resume Point ก่อน:**
 - **IF** `Active Task` ใน AXON_STATE.md ไม่ใช่ "None":
-  - → **Resume** task นั้น
+  - → แสดง Resume prompt:
+    ```
+    📋 พบงานค้าง: [Task ID] - [Task Name]
+    📊 Progress: [X/Y] tasks done
+    💾 Last mode: [IGNITE/ENLIGHTEN]
+
+    ทำต่อจากจุดเดิมไหม?
+    ```
+  - → ถ้า user ตอบ "ได้" → **Resume** task นั้น
   - → โหลด `Partial Results` มาใช้ต่อ
   - → ข้ามไป Step 4 (EXECUTION)
-- **ELSE:**
+- **ELSE IF** มี tasks `[ ]` ใน MAP:
   - → หยิบงาน `[ ]` งานแรกจาก AXON_MAP.md
   - → อัพเดท `Active Task` ใน STATE
+- **ELSE:**
+  - → "ไม่มี tasks - รัน /axon:concept หรือ /axon:enlighten ก่อน"
 
 ### 3. MITOSIS (Self-Expand Tasks)
 
@@ -1489,6 +1516,78 @@ READ: .axon/mcp.md (MCP tools ที่ใช้ได้)
 
 | Situation | Parallel Action |
 |-----------|----------------|
+
+#### 4.2 LIVE ENLIGHTENMENT (ตรัสรู้ระหว่างทำ)
+
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║  🧘 LIVE ENLIGHTENMENT: ตรัสรู้ระหว่างทำงาน                        ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║  ระหว่างทำ Task ถ้าพบว่า:                                          ║
+║     • ต้องการข้อมูลเพิ่ม                                          ║
+║     • เจอปัญหาที่ต้อง research                                    ║
+║     • พบว่ามีงานใหม่ที่ต้องทำ                                     ║
+║     • ค้นพบ approach ที่ดีกว่า                                    ║
+║                                                                   ║
+║  → ตรัสรู้ทันที! (ไม่ต้อง switch mode)                            ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+```
+
+**LIVE ENLIGHTENMENT PROTOCOL:**
+
+```
+[กำลังทำ Task] → 💡 พบสิ่งที่ต้อง research/คิด
+       ↓
+[ตรัสรู้ทันที]:
+  1. ค้นหา/วิเคราะห์ (ใช้ WebSearch, Read, etc.)
+  2. บันทึกผลเข้า AXON_KNOWLEDGE.md
+  3. ถ้าพบงานใหม่ → เพิ่มเข้า AXON_MAP.md ทันที!
+       ↓
+[กลับมาทำ Task ต่อ] → ใช้ความรู้ใหม่ทำให้เสร็จ
+```
+
+**เมื่อพบงานใหม่ระหว่างตรัสรู้:**
+
+```markdown
+💡 DISCOVERED TASK:
+[เพิ่มเข้า AXON_MAP.md ทันที]
+- [ ] [T00X] [งานใหม่ที่ค้นพบ]
+
+📋 MAP Updated: +1 task (now Y tasks pending)
+```
+
+**Status Display (ตอนตรัสรู้):**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ 🤖 Opus 4.5 | 🔥 IGNITE + 🧘 | 📋 [T003]                        │
+│ 💡 Live Enlightenment: researching auth best practices...       │
+│ 📊 3/5 tasks | +2 discovered                                    │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**ตัวอย่าง:**
+
+```
+[ทำ T003: Implement login]
+       ↓
+💡 "ต้องเลือกวิธี hash password - ควร research ก่อน"
+       ↓
+[ตรัสรู้] → ค้น "password hashing best practices 2024"
+       ↓
+[บันทึก KNOWLEDGE]: bcrypt vs argon2 vs scrypt comparison
+       ↓
+💡 "พบว่าควรเพิ่ม rate limiting ด้วย"
+       ↓
+[เพิ่ม MAP]:
+- [ ] [T006] Add rate limiting for login ← ใหม่!
+       ↓
+[กลับทำ T003 ต่อ] → ใช้ argon2 (best จาก research)
+       ↓
+[T003 เสร็จ] → ทำ T004 ต่อ (หรือ T006 ที่เพิ่งเพิ่ม)
+```
 
 ---
 
