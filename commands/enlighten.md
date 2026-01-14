@@ -58,6 +58,101 @@ description: "Enlightenment Mode - ตรัสรู้ → สร้าง MAP
 
 ---
 
+## 🧠⚡ DUAL POWER ENLIGHTENMENT (ใช้ทั้ง 2 พลัง!)
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  🧠⚡ ใช้ทั้ง Claude Knowledge + Search + SYNTHESIZE!                  ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  ทุกครั้งที่ตรัสรู้ ต้องใช้ทั้ง 2 พลัง + สังเคราะห์ใหม่!               ║
+║                                                                       ║
+║  พลัง 2 อย่าง:                                                        ║
+║  🧠 Claude Knowledge = ความรู้ในตัว (cutoff: May 2025)                ║
+║  🔍 Web Search = ข้อมูลใหม่/เฉพาะทาง/sources                          ║
+║                                                                       ║
+║  🔄 DUAL POWER FLOW:                                                  ║
+║                                                                       ║
+║  ┌──────────────────┬──────────────────┐                              ║
+║  │ 🧠 CLAUDE        │ 🔍 SEARCH        │                              ║
+║  │ (ตอบจากความรู้)   │ (Parallel!)      │                              ║
+║  └────────┬─────────┴────────┬─────────┘                              ║
+║           │                  │                                        ║
+║           └────────┬─────────┘                                        ║
+║                    ▼                                                  ║
+║           ⚖️ COMPARE & VERIFY                                         ║
+║                    │                                                  ║
+║                    ▼                                                  ║
+║           🔬 SYNTHESIZE (สังเคราะห์ใหม่!)                              ║
+║           • Claude ไม่ได้รู้ทุกอย่าง → ต้องคิดใหม่                     ║
+║           • รวม + วิเคราะห์ + สร้างความรู้ใหม่                         ║
+║           • หา insight ที่ไม่มีใน source เดิม                          ║
+║                    │                                                  ║
+║                    ▼                                                  ║
+║           💎 THE BEST OUTPUT                                          ║
+║                                                                       ║
+║  📋 EXECUTION:                                                        ║
+║                                                                       ║
+║  1. 🧠 Claude ตอบก่อน - จากความรู้ที่มี                                ║
+║  2. 🔍 Search พร้อมกัน - หลาย vectors (Parallel!)                     ║
+║  3. ⚖️ เทียบผล - Claude vs Search                                     ║
+║     • ตรงกัน? → เชื่อถือได้สูง ✅                                      ║
+║     • ต่างกัน? → วิเคราะห์ว่าอันไหนถูก                                ║
+║     • Search มีข้อมูลใหม่กว่า? → อัพเดทความรู้                        ║
+║  4. 🔬 SYNTHESIZE - สังเคราะห์ความรู้ใหม่!                             ║
+║     • ไม่ใช่แค่ copy/paste จาก sources                                ║
+║     • ต้องวิเคราะห์ + สร้าง insight ใหม่                               ║
+║     • เชื่อมโยงข้อมูลจากหลายแหล่ง                                     ║
+║  5. 💎 บันทึก KNOWLEDGE - ความรู้ที่ตกผลึก                             ║
+║                                                                       ║
+║  ❌ ห้าม:                                                              ║
+║     • ใช้แค่ Claude อย่างเดียว (อาจ outdated)                         ║
+║     • ใช้แค่ Search อย่างเดียว (เปลือง token)                         ║
+║     • Copy/paste โดยไม่สังเคราะห์                                     ║
+║                                                                       ║
+║  ✅ ต้อง:                                                              ║
+║     • ใช้ทั้ง 2 พลังพร้อมกัน (Parallel!)                              ║
+║     • เทียบผล → verify                                                ║
+║     • สังเคราะห์ใหม่ → สร้าง insight                                  ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+### 🔬 ตัวอย่าง DUAL POWER + SYNTHESIZE
+
+```
+Topic: "Best practices สำหรับ React state management"
+
+🧠 Claude รู้:
+   - Redux, Context API, Zustand, Jotai...
+   - ข้อดี/เสียพื้นฐาน
+
+🔍 Search (Parallel):
+   - [React docs 2025]
+   - [State of JS survey]
+   - [Dev.to articles]
+   - [Stack Overflow trends]
+
+⚖️ เทียบผล:
+   - Claude บอกว่า Redux ยังนิยม
+   - Search บอกว่า Zustand/Jotai กำลังมา
+
+🔬 SYNTHESIZE (สิ่งที่ Claude ต้องคิดใหม่!):
+   - "Redux ยังดีสำหรับ enterprise scale..."
+   - "แต่ trend ไป Zustand เพราะ simpler API..."
+   - "สำหรับโปรเจคนี้ที่เป็น medium scale..."
+   - "ควรใช้ Zustand + React Query เพราะ..."
+   → สร้าง recommendation ใหม่ที่ไม่มีใน source!
+
+💎 Output:
+   - รวมความรู้ Claude + data จาก Search
+   - + Insight ใหม่จากการ synthesize
+   - ให้ credit source ที่มา
+   - ระบุ confidence level
+```
+
+---
+
 ## 🗺️ MAP INTEGRATION PROTOCOL (สร้าง MAP ขณะทำ!)
 
 ```
