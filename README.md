@@ -33,7 +33,7 @@ cp /tmp/axon-zenith/commands/*.md ~/.claude/commands/axon/
 rm -rf /tmp/axon-zenith
 ```
 
-> หลังติดตั้ง พิมพ์ `/axon` จะเห็น commands ทั้ง 5 ตัว
+> หลังติดตั้ง พิมพ์ `/axon` จะเห็น commands ทั้ง 6 ตัว
 
 ---
 

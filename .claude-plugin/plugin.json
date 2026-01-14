@@ -1,6 +1,6 @@
 {
   "name": "axon-zenith",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "AXON Zenith - Autonomous Execution System for Claude Code (ช้าได้ แต่ห้ามห่วย)",
   "author": "pinkkydev",
   "license": "MIT",
@@ -8,7 +8,9 @@
     "setup",
     "concept",
     "ignite",
-    "mcp"
+    "enlighten",
+    "mcp",
+    "upgrade"
   ],
   "agents": [],
   "skills": [],
