@@ -250,6 +250,226 @@ description: "Enlightenment Mode - ขุดข้อมูลไม่หยุ
 
 ---
 
+## 📚 KNOWLEDGE TRACKING (บันทึกทุกอย่างที่รู้!)
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  📚 UNIFIED KNOWLEDGE: AXON_KNOWLEDGE.md                              ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  ทั้ง IGNITE และ ENLIGHTEN ใช้ KNOWLEDGE เดียวกัน!                    ║
+║                                                                       ║
+║  📁 AXON_KNOWLEDGE.md                                                 ║
+║     ├── 🔥 IGNITE → Technical insights, Code patterns, Solutions     ║
+║     └── 🧘 ENLIGHTEN → Research facts, Sources, Scores               ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+### 🔍 CHECK BEFORE SEARCH (ตรวจสอบก่อนค้นทุกครั้ง!)
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  🔍 CHECK KNOWLEDGE FIRST (บังคับ!)                                   ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  ก่อนค้นหาข้อมูลใดๆ ต้อง:                                             ║
+║                                                                       ║
+║  1️⃣ อ่าน AXON_KNOWLEDGE.md หา topic นี้                               ║
+║     → ดูว่ารู้อะไรแล้ว + score เท่าไหร่                                ║
+║                                                                       ║
+║  2️⃣ ตรวจสอบ Credibility Score                                         ║
+║     → IF score >= 70% → ไม่ค้นซ้ำ (ยกเว้น user ขอ verify)            ║
+║     → IF score < 70% → ค้นเพิ่มเพื่อ verify                           ║
+║                                                                       ║
+║  3️⃣ ดู Dimensions ที่ค้นแล้ว                                          ║
+║     → ค้นเฉพาะ dimension ที่ยังไม่ได้ค้น                              ║
+║     → ไม่ค้นซ้ำ dimension เดิม                                        ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+### 📝 SAVE AFTER SEARCH (บันทึกหลังค้นทุกครั้ง!)
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  📝 SAVE TO KNOWLEDGE (บังคับหลังค้นทุกครั้ง!)                         ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  หลังค้นหาได้ข้อมูล ต้องบันทึกลง AXON_KNOWLEDGE.md ทันที:            ║
+║                                                                       ║
+║  1️⃣ เพิ่ม Facts ใหม่ + Credibility Score                              ║
+║  2️⃣ อัพเดท Dimensions ที่ค้นแล้ว                                      ║
+║  3️⃣ Mark Conflicts ถ้าเจอข้อมูลขัดแย้ง                                ║
+║  4️⃣ อัพเดท Timestamp                                                  ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+### 📊 KNOWLEDGE FORMAT
+
+```markdown
+---
+id: enlighten_[topic]_[timestamp]
+topic: [หัวข้อ]
+type: research
+status: in_progress | complete
+last_update: [timestamp]
+---
+
+## 📊 [Topic] Research Progress
+
+**Status:** 🔄 In Progress
+**Dimensions:** 4/7 searched
+**Facts:** 23 verified, 5 pending
+
+### ✅ Known Facts (Score 70%+)
+
+| Fact | Source | Score | Verified |
+|------|--------|-------|----------|
+| [ข้อเท็จจริง 1] | [แหล่งที่มา] | 95% | ✅ |
+| [ข้อเท็จจริง 2] | [แหล่งที่มา] | 85% | ✅ |
+
+### ⚠️ Needs Verification (Score <70%)
+
+| Fact | Source | Score | Action |
+|------|--------|-------|--------|
+| [ข้อมูล] | [แหล่ง] | 55% | หาแหล่งเพิ่ม |
+
+### 🔍 Dimensions Searched
+
+- [x] Biography
+- [x] Companies
+- [ ] Controversies ← ยังไม่ได้ค้น
+- [ ] Financial ← ยังไม่ได้ค้น
+
+### ⚡ Conflicts Found
+
+- Source A says X, Source B says Y → Need more research
+```
+
+### 📊 CREDIBILITY SCORING (บังคับทุก fact!)
+
+| Score | Meaning | Action |
+|-------|---------|--------|
+| 90-100% | Highly Reliable (หลายแหล่งยืนยัน) | ใช้ได้เลย |
+| 70-89% | Reliable | ไม่ต้องค้นซ้ำ |
+| 50-69% | Moderate | ต้องหาแหล่งเพิ่ม |
+| <50% | Low | ต้องค้นใหม่ |
+
+**Scoring Factors:**
+- Source Reliability (30%)
+- Corroboration (25%)
+- Recency (20%)
+- Specificity (15%)
+- Bias Check (10%)
+
+---
+
+## 🔍 MULTI-VECTOR SEARCH (ค้นหลายทางพร้อมกัน)
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  🔍 PARALLEL RESEARCH (ไม่รอทีละอัน!)                                  ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  ❌ แบบเดิม (Sequential):                                             ║
+║     [ค้น Google] → รอ → [ค้น Wikipedia] → รอ → [ค้น News] → รอ        ║
+║                                                                       ║
+║  ✅ แบบใหม่ (Multi-Vector):                                           ║
+║     [ค้น Google] [ค้น Wikipedia] [ค้น News] → รอครั้งเดียว → รวมผล    ║
+║                                                                       ║
+║  ⚡ RESULT:                                                            ║
+║     • เร็วขึ้น 3-5x                                                   ║
+║     • ครอบคลุมมากขึ้น                                                 ║
+║     • ข้อมูลหลากหลายมุม                                               ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+### 🎯 SEARCH VECTORS
+
+เมื่อต้องการข้อมูลเรื่องใดเรื่องหนึ่ง ส่ง Workers ค้นหลายทางพร้อมกัน:
+
+| Vector | Worker Task | ตัวอย่าง |
+|--------|-------------|---------|
+| **Factual** | Wikipedia, official sources | ข้อเท็จจริงพื้นฐาน |
+| **News** | Recent articles, press | ข่าวล่าสุด |
+| **Academic** | Papers, research | งานวิจัย |
+| **Social** | Forums, discussions | ความคิดเห็น |
+| **Data** | APIs, databases | ข้อมูลตัวเลข |
+
+### 🔄 MULTI-VECTOR PROTOCOL
+
+1️⃣ **IDENTIFY VECTORS**
+```
+Topic: "Elon Musk"
+Vectors:
+• [V1] Biography → Wikipedia
+• [V2] Companies → Tesla, SpaceX, X official
+• [V3] News → Recent articles
+• [V4] Controversy → SEC, lawsuits
+• [V5] Social → Twitter history
+```
+
+2️⃣ **DISPATCH WORKERS**
+```javascript
+// ส่งพร้อมกัน! (Max 5 parallel)
+Task("Search Wikipedia for Elon Musk biography", model: "haiku")
+Task("Search Tesla SpaceX X official info", model: "haiku")
+Task("Search recent Elon Musk news 2024-2025", model: "haiku")
+Task("Search Elon Musk SEC lawsuits controversy", model: "haiku")
+```
+
+3️⃣ **AGGREGATE & VERIFY**
+```
+Worker Results → Boss (Opus) รวมผล:
+• ตรวจข้อมูลขัดแย้ง
+• ให้คะแนนความน่าเชื่อถือ
+• หาช่องว่าง → สร้าง vector ใหม่
+• บันทึกลง AXON_KNOWLEDGE.md
+```
+
+### 📊 STATUS DISPLAY (Multi-Vector Mode)
+
+```
+┌─────────────────────────────────────────────────────┐
+│ 🤖 Opus 4.5 | 🧘 ENLIGHTEN | 🔍 Elon Musk          │
+│ 📊 5 Vectors | ⚡ 4 Workers Active                  │
+├─────────────────────────────────────────────────────┤
+│ V1 Biography:   [██████] ✅ 12 facts               │
+│ V2 Companies:   [████░░] 70% - SpaceX              │
+│ V3 News:        [██████] ✅ 8 articles             │
+│ V4 Controversy: [███░░░] 50% - SEC                 │
+└─────────────────────────────────────────────────────┘
+```
+
+### 🔁 RECURSIVE DEEPENING
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  🔁 เจอข้อมูลน่าสนใจ → สร้าง Vectors ใหม่ทันที!                        ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  Round 1: ค้น "Elon Musk"                                             ║
+║     → เจอ: ก่อตั้ง 6 บริษัท                                           ║
+║                                                                       ║
+║  Round 2: ค้นแต่ละบริษัทพร้อมกัน                                      ║
+║     → [Tesla] [SpaceX] [Neuralink] [Boring] [X] [xAI]                ║
+║     → เจอ: Tesla มีคดี SEC                                            ║
+║                                                                       ║
+║  Round 3: ค้น SEC + lawsuits                                          ║
+║     → ได้ข้อมูลเชิงลึก                                                ║
+║                                                                       ║
+║  💡 LIVE THINKING: ไม่รู้ล่วงหน้าว่าจะค้นอะไร                          ║
+║     → เจอแล้วค่อยตัดสินใจ!                                            ║
+║     → บันทึกทุกอย่างลง KNOWLEDGE ทันที!                               ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
 ## 📋 OUTPUT FORMAT
 
 ```
@@ -310,8 +530,11 @@ description: "Enlightenment Mode - ขุดข้อมูลไม่หยุ
 ## 📋 EXECUTION CHECKLIST
 
 ```markdown
-□ ค้นหาแล้ว?
-□ ให้คะแนน credibility แล้ว?
+□ ตรวจ KNOWLEDGE ก่อนค้นแล้ว? (ดูว่ารู้อะไรแล้ว)
+□ ค้นหาแล้ว? (เฉพาะที่ยังไม่รู้/score < 70%)
+□ ให้คะแนน credibility ทุก fact แล้ว?
+□ บันทึกลง AXON_KNOWLEDGE.md แล้ว?
+□ อัพเดท Dimensions แล้ว?
 □ หามิติใหม่แล้ว?
 □ ขุดต่อแล้ว? → ถ้าไม่ = ERROR!
 □ รับใบ้จาก user แล้ว? (ถ้ามี)

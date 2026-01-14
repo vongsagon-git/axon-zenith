@@ -44,7 +44,8 @@ AXON Zenith เปลี่ยน Claude ให้เป็น **Autonomous Agen
 - **ทำงานไม่หยุด** จนกว่า user จะสั่งหยุด หรือติด limit
 - **Zenith Quality** - ทุกงานต้อง "สุด" ทุกมิติ
 - **Live Thinking** - คิด task สดๆ ระหว่างทำ
-- **Parallel Execution** - ทำหลายงานพร้อมกัน
+- **Multi-Agent** - Boss-Worker pattern (Opus + Haiku workers)
+- **Unified Knowledge** - บันทึกความรู้ไว้ที่เดียว ไม่ทำซ้ำ
 - **รับใบ้ได้** - User ชี้ทางระหว่างทำได้ตลอด
 
 ---
@@ -313,6 +314,99 @@ AXON ออกแบบมาให้ทำงานต่อเนื่อง
 
 ---
 
+## 🤖 Multi-Agent Support (v1.2)
+
+AXON ใช้ **Boss-Worker Pattern** เพื่อทำงานเร็วขึ้น:
+
+```
+       🤖 BOSS (Opus 4.5)
+              │
+    ┌─────────┼─────────┐
+    ▼         ▼         ▼
+⚡ Worker  ⚡ Worker  ⚡ Worker
+ (Haiku)   (Haiku)   (Haiku)
+    │         │         │
+    └─────────┴─────────┘
+              │
+       🤖 BOSS รวมผล
+```
+
+### 🔥 IGNITE - Multi-Agent Execution
+
+| งาน | Workers | Strategy |
+|-----|---------|----------|
+| Search 5 directories | 5 Haiku | MERGE |
+| Format 20 files | 4 Haiku | MERGE |
+| Compare 3 approaches | 3 Haiku | VOTE |
+
+### 🧘 ENLIGHTEN - Multi-Vector Search
+
+ค้นหลายทางพร้อมกัน:
+
+```
+[ค้น Wikipedia] [ค้น News] [ค้น Academic] → รอครั้งเดียว → รวมผล
+```
+
+**Status Display (Multi-Agent Mode):**
+
+```
+┌─────────────────────────────────────────────────────┐
+│ 🤖 Opus 4.5 | 🧘 ENLIGHTEN | 🔍 Elon Musk          │
+│ 📊 5 Vectors | ⚡ 4 Workers Active                  │
+├─────────────────────────────────────────────────────┤
+│ V1 Biography:   [██████] ✅ 12 facts               │
+│ V2 Companies:   [████░░] 70% - SpaceX              │
+│ V3 News:        [██████] ✅ 8 articles             │
+│ V4 Controversy: [███░░░] 50% - SEC                 │
+└─────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📚 Unified Knowledge (v1.2)
+
+ทั้ง IGNITE และ ENLIGHTEN ใช้ **AXON_KNOWLEDGE.md** ร่วมกัน:
+
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║  📚 AXON_KNOWLEDGE.md (Shared Knowledge)                          ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║  🔥 IGNITE writes → Technical insights, Code patterns             ║
+║  🧘 ENLIGHTEN writes → Research facts, Sources, Scores            ║
+║                                                                   ║
+║  🔄 BOTH READ: ก่อนทำงาน/ค้นหา ตรวจสอบ KNOWLEDGE ก่อน             ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+```
+
+### 📊 Credibility Scoring
+
+ทุก fact ต้องมี Credibility Score (0-100%):
+
+| Score | Meaning | Action |
+|-------|---------|--------|
+| 90-100% | Highly Reliable | ใช้ได้เลย |
+| 70-89% | Reliable | ไม่ต้องค้นซ้ำ |
+| 50-69% | Moderate | ต้องหาแหล่งเพิ่ม |
+| <50% | Low | ต้องค้นใหม่ |
+
+### 🔍 Check Before Search
+
+ก่อนค้น/ทำงาน:
+1. อ่าน AXON_KNOWLEDGE.md
+2. ดูว่ารู้อะไรแล้ว + score เท่าไหร่
+3. ถ้า score >= 70% → ไม่ค้นซ้ำ
+4. ถ้า score < 70% → ค้นเพิ่มเพื่อ verify
+
+**ประโยชน์:**
+- ไม่ค้นซ้ำเรื่องเดิม
+- ไม่ลืมว่ารู้อะไรแล้ว
+- เห็น gaps ที่ยังไม่ได้ค้น
+- หลัง compact ความรู้ยังอยู่
+
+---
+
 ## 🔄 Update Plugin
 
 **อัพเดทเป็นเวอร์ชันล่าสุด:**
@@ -352,7 +446,8 @@ rm -rf /tmp/axon-zenith
 - [x] **v1.1** - Status Display
 - [x] **v1.1** - Token Management
 - [x] **v1.1** - Concept Modes (NEW, ADD, MODIFY, EXPAND, LINK)
-- [ ] **v2.0** - Multi-Agent Support
+- [x] **v1.2** - Multi-Agent Support (Boss-Worker Pattern)
+- [x] **v1.2** - Unified Knowledge Tracking (AXON_KNOWLEDGE.md)
 - [ ] **v2.0** - Vector Memory
 
 ---
