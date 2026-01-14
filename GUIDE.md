@@ -11,6 +11,10 @@
 
 **Windows (PowerShell):**
 ```powershell
+# ล้างของเดิม (ถ้ามี)
+Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\commands\axon" -ErrorAction SilentlyContinue
+
+# ติดตั้งใหม่
 git clone https://github.com/vongsagon-git/axon-zenith.git "$env:USERPROFILE\.claude\temp-axon"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\commands\axon"
 Copy-Item "$env:USERPROFILE\.claude\temp-axon\commands\*.md" "$env:USERPROFILE\.claude\commands\axon\"
@@ -19,6 +23,10 @@ Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\temp-axon"
 
 **macOS / Linux:**
 ```bash
+# ล้างของเดิม (ถ้ามี)
+rm -rf ~/.claude/commands/axon
+
+# ติดตั้งใหม่
 git clone https://github.com/vongsagon-git/axon-zenith.git /tmp/axon-zenith
 mkdir -p ~/.claude/commands/axon
 cp /tmp/axon-zenith/commands/*.md ~/.claude/commands/axon/
