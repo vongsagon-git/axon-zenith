@@ -77,14 +77,48 @@ READ: .axon/mcp.md (MCP tools ที่ใช้ได้)
 **IF ANY FAILED:** ตีกลับ → วนกลับข้อ 4
 **IF ALL PASSED:** ไปขั้นตอนถัดไป
 
-### 6. KNOWLEDGE EXTRACTION
-บันทึก Insight ที่ได้ลง AXON_KNOWLEDGE.md (ภาษาไทย)
+### 6. KNOWLEDGE EXTRACTION (บังคับ!)
 
-### 7. CHECKPOINT
+**ต้องบันทึกทุกครั้งที่จบ Task:**
 
-- อัพเดท AXON_MAP.md: `[ ]` → `[x]`
-- อัพเดท AXON_STATE.md
-- Git Commit (ถ้ามี git)
+```markdown
+# เพิ่มเข้า AXON_KNOWLEDGE.md
+
+---
+id: [task-id]-[timestamp]
+tags: [หัวข้อที่เกี่ยวข้อง]
+---
+
+### [สิ่งที่เรียนรู้]
+- [Insight 1]
+- [Insight 2]
+```
+
+### 7. CHECKPOINT (บังคับ! - ต้องทำทุกข้อ)
+
+**อัปเดตทั้ง 3 ไฟล์:**
+
+#### 7.1 AXON_MAP.md
+```markdown
+- [x] [TaskID] Task description ✅ (เสร็จแล้ว)
+```
+
+#### 7.2 AXON_STATE.md
+```markdown
+**Last Update:** [Timestamp ตอนนี้]
+**Active Task:** [Task ถัดไป] หรือ "None"
+**Last Action:** [สิ่งที่เพิ่งทำเสร็จ]
+```
+
+#### 7.3 AXON_KNOWLEDGE.md
+- เพิ่ม Knowledge chunk ใหม่ (จาก Step 6)
+
+#### 7.4 Git Commit (ถ้ามี git)
+```bash
+git add AXON_*.md && git commit -m "✅ [TaskID] completed"
+```
+
+**⚠️ ห้ามข้ามขั้นตอนนี้เด็ดขาด!**
 
 ### 8. AUTO-DISCOVERY (Infinite Expansion)
 
@@ -139,4 +173,30 @@ READ: .axon/mcp.md (MCP tools ที่ใช้ได้)
 ---
 **Progress:** [X/Y] tasks done
 **กำลังทำต่อ:** [TaskID ถัดไป]
+```
+
+---
+
+## ⚠️ MANDATORY FILE UPDATES
+
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║  🔴 ต้องอัปเดตทุกครั้งที่จบ Task (ห้ามข้าม!)                       ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║  📋 AXON_MAP.md                                                   ║
+║     → Mark [x] task ที่เสร็จ                                      ║
+║     → เพิ่ม task ใหม่ที่ค้นพบ                                     ║
+║                                                                   ║
+║  🧠 AXON_STATE.md                                                 ║
+║     → อัปเดต Last Update timestamp                                ║
+║     → อัปเดต Active Task                                          ║
+║     → อัปเดต Last Action                                          ║
+║                                                                   ║
+║  💎 AXON_KNOWLEDGE.md                                             ║
+║     → เพิ่ม Knowledge chunk ใหม่                                  ║
+║     → ใช้ภาษาไทย                                                  ║
+║                                                                   ║
+║  ❌ ถ้าไม่อัปเดต = ผิดกฎ AXON!                                    ║
+╚═══════════════════════════════════════════════════════════════════╝
 ```
