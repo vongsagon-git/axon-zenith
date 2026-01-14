@@ -1,13 +1,13 @@
 # 📖 คู่มือการใช้งาน AXON Zenith Plugin
 
-> **Version:** 1.0.0
+> **Version:** 1.1.0
 > **Philosophy:** "ช้าได้ แต่ห้ามห่วย" (Lateness is acceptable, Mediocrity is not)
 
 ---
 
 ## 📥 การติดตั้ง
 
-### วิธีที่ 1: Clone จาก GitHub (แนะนำ - ใช้งานส่วนตัว)
+### วิธีที่ 1: Clone จาก GitHub (แนะนำ)
 
 **Windows (PowerShell):**
 ```powershell
@@ -35,19 +35,15 @@ rm -rf /tmp/axon-zenith
 
 > 💡 **หมายเหตุ:** วิธีนี้จะติดตั้ง commands แบบ global ใช้ได้ทุกโปรเจค
 
-### วิธีที่ 2: ติดตั้งผ่าน Official Marketplace (เร็วๆ นี้)
-```bash
-/plugin install vongsagon-git/axon-zenith
-```
-> ⚠️ ต้องรอ Anthropic อนุมัติก่อน
-
 ### ตรวจสอบการติดตั้ง
 หลังติดตั้งแล้ว ลองพิมพ์ `/axon` ใน Claude Code จะเห็น:
 ```
 /axon:setup
 /axon:concept
 /axon:ignite
+/axon:enlighten
 /axon:mcp
+/axon:upgrade
 ```
 
 ---
@@ -85,15 +81,14 @@ rm -rf /tmp/axon-zenith
 ```
 
 ระบบจะทำงานไม่หยุดจนกว่า:
-- งานเสร็จ 100%
 - ติด API limit
-- คุณพิมพ์ "หยุด"
+- คุณพิมพ์ "หยุด" หรือ "stop"
 
 ---
 
-## 🔧 คำสั่งทั้งหมด
+## 🔧 คำสั่งทั้งหมด (6 Commands)
 
-### `/axon:setup`
+### `/axon:setup` - ⚙️ เริ่มต้นโปรเจค
 สร้างไฟล์ระบบ AXON ทั้งหมด
 
 **ไฟล์ที่สร้าง:**
@@ -110,14 +105,27 @@ rm -rf /tmp/axon-zenith
 
 ---
 
-### `/axon:concept [task]`
-วางแผนงานแบบ Architecture First
+### `/axon:concept [task]` - 📐 วางแผน
+
+วางแผนงานแบบ Architecture First - **วางแผนอย่างเดียว ไม่ทำงาน**
+
+**Concept Modes:**
+
+| Mode | วิธีใช้ | ทำอะไร |
+|------|--------|--------|
+| **NEW** | `/axon:concept สร้าง X` | สร้าง roadmap ใหม่ |
+| **ADD** | `/axon:concept เพิ่ม: Y` | เพิ่มงานต่อ roadmap เดิม |
+| **MODIFY** | `/axon:concept แก้: [ID]` | แก้ไข task ที่มีอยู่ |
+| **EXPAND** | `/axon:concept ขยาย: [ID]` | แตก task เป็น sub-tasks |
+| **LINK** | `/axon:concept รวม` | สร้าง Master Roadmap |
 
 **ตัวอย่าง:**
 ```bash
 /axon:concept เพิ่มระบบ notification แบบ real-time
 /axon:concept refactor database layer ให้รองรับ sharding
 /axon:concept สร้าง API สำหรับ mobile app
+/axon:concept เพิ่ม: dark mode feature
+/axon:concept ขยาย: [T003]
 ```
 
 **Output:**
@@ -127,8 +135,9 @@ rm -rf /tmp/axon-zenith
 
 ---
 
-### `/axon:ignite`
-รัน Zenith Loop - ทำงานไม่หยุดจนเสร็จ
+### `/axon:ignite` - 🔥 ทำงานไม่หยุด
+
+รัน Zenith Loop - **ไม่มีจุดจบ!**
 
 **Flow:**
 ```
@@ -139,10 +148,67 @@ rm -rf /tmp/axon-zenith
 │  2. ทำงานจนเสร็จ                                 │
 │  3. Mark [x] และบันทึก Knowledge                │
 │  4. สร้างงานใหม่ถ้าจำเป็น                        │
-│  5. วนกลับ Step 1                               │
+│  5. MAP หมด? → หางานใหม่เอง!                    │
+│  6. วนกลับ Step 1 (ไม่มีจุดจบ)                   │
 │                                                 │
 │  ❌ ห้ามหยุด ❌ ห้ามถาม ❌ ห้ามรอ                │
 └─────────────────────────────────────────────────┘
+```
+
+**ระหว่างทำงานสามารถ:**
+- พิมพ์ใบ้: `"เพิ่ม dark mode ด้วย"` → ระบบรับและเพิ่มใน MAP
+- พิมพ์ `/axon:concept [งานใหม่]` → เพิ่มงานใหม่เข้า MAP
+
+**หยุด Loop:**
+- พิมพ์ `หยุด` หรือ `stop`
+- ติด API limit
+
+---
+
+### `/axon:enlighten [topic]` - 🧘 ขุดข้อมูลไม่หยุด (ตรัสรู้)
+
+Mode พิเศษสำหรับ Research - **คิดสดๆ ไม่วางแผนล่วงหน้า!**
+
+**ความแตกต่างจาก Concept:**
+| Concept | Enlighten |
+|---------|-----------|
+| วางแผนก่อน → ทำตามแผน | ไม่วางแผน → ทำเลย |
+| รู้ล่วงหน้าว่าต้องทำอะไร | ค้นพบว่าต้องทำอะไรขณะทำ |
+| Tasks คงที่ | Tasks เพิ่มขึ้นเรื่อยๆ |
+
+**ตัวอย่างการใช้งาน:**
+```bash
+/axon:enlighten ประวัติ Elon Musk ทุกมิติ
+/axon:enlighten ราคา Bitcoin ย้อนหลัง 5 ปี
+/axon:enlighten competitor analysis สำหรับ fintech
+/axon:enlighten ข้อมูลตลาดอสังหาฯ กรุงเทพ
+```
+
+**Flow:**
+```
+User: "อยากรู้ประวัติ Elon Musk"
+      ↓
+[ค้น Wikipedia] → ได้ข้อมูลพื้นฐาน
+      ↓
+💡 "เห็นว่ามีบริษัทหลายอัน → ต้องขุดแต่ละอัน"
+      ↓
+[ค้น Tesla] [ค้น SpaceX] [ค้น X] (Parallel)
+      ↓
+💡 "เห็นว่ามีคดีความ → ต้องขุดเพิ่ม"
+      ↓
+[ค้น SEC] [ค้น Lawsuits]
+      ↓
+💡 "ต้องการข้อมูล real-time → ต้องใช้ puppeteer"
+      ↓
+[ขอ user ลง MCP หรือลงเอง]
+      ↓
+[ค้นต่อ] → [ค้นต่อ] → [ค้นต่อ] (ไม่มีจุดจบ!)
+```
+
+**ใบ้ระหว่างขุด:**
+```
+User: ลองหาจาก LinkedIn ด้วย
+Claude: 💡 รับใบ้ → ปรับทิศทาง → ขุดต่อ
 ```
 
 **หยุด Loop:**
@@ -151,8 +217,7 @@ rm -rf /tmp/axon-zenith
 
 ---
 
-### `/axon:mcp [action]`
-จัดการ MCP Servers
+### `/axon:mcp [action]` - 🔌 จัดการ MCP Servers
 
 **Actions:**
 
@@ -169,11 +234,108 @@ rm -rf /tmp/axon-zenith
 |------|-----|---------|
 | **Web** | puppeteer | ควบคุม browser |
 | **Web** | fetch | ดึงข้อมูล URL |
+| **Search** | brave-search | ค้นหาเว็บ |
 | **Database** | sqlite, postgres | SQL database |
 | **NoSQL** | mongodb | MongoDB + Vector |
 | **Vector** | qdrant, chroma, pinecone | Vector search |
 | **AI** | huggingface | Models, Datasets |
 | **Cloud** | digitalocean | DO resources |
+
+---
+
+### `/axon:upgrade` - 🔄 อัพเกรดโปรเจคเก่า
+
+อัพเกรดโปรเจคที่ใช้ AXON version เก่าให้รองรับ features ใหม่
+
+**ใช้เมื่อ:**
+- มีโปรเจคเก่าที่ใช้ AXON v1.0
+- ต้องการ features ใหม่ (Status Display, Enlighten, etc.)
+
+**ทำอะไร:**
+1. ตรวจสอบ version ปัจจุบัน
+2. Backup ไฟล์เดิม
+3. อัพเดท CLAUDE.md และ config
+4. ไม่ลบ customization ของ user
+
+**ตัวอย่าง:**
+```bash
+/axon:upgrade
+```
+
+**Output:**
+```
+🔄 Upgrade Complete
+
+From: v1.0
+To: v1.1
+
+Files Modified:
+- ✅ CLAUDE.md - เพิ่ม STATUS DISPLAY, TOKEN MANAGEMENT
+- ✅ .axon/config.md - เพิ่ม version field
+
+Backup Location:
+.axon/backup/[timestamp]/
+```
+
+---
+
+## 🖥️ Status Display
+
+ทุก Mode จะแสดง Status ให้รู้ว่ากำลังทำอะไร:
+
+```
+┌─────────────────────────────────────────┐
+│ 🤖 [MODEL] | [MODE] | 📋 [TASK/TOPIC]  │
+│ 📊 [Progress Info]                      │
+└─────────────────────────────────────────┘
+```
+
+### Mode Icons
+
+| Mode | Icon | แสดงเมื่อ |
+|------|------|---------|
+| CONCEPT | 📐 | กำลังวางแผน |
+| IGNITE | 🔥 | กำลังทำงาน |
+| ENLIGHTEN | 🧘 | กำลังขุดข้อมูล |
+| DELEGATE | ⚡ | ส่งงานให้ Haiku |
+| RECOVERY | 🔄 | กลับมาหลัง compact |
+
+### Model Icons
+
+| Model | Icon | ใช้เมื่อ |
+|-------|------|---------|
+| Opus 4.5 | 🤖 | งานที่ต้องคิด |
+| Haiku | ⚡ | งาน repetitive |
+| Sonnet | 🎯 | งานกลางๆ |
+
+---
+
+## 💡 User Hints (ใบ้ระหว่างทาง)
+
+ทุก Mode รับใบ้จาก user ได้ตลอด:
+
+**Ignite:**
+```
+User: เพิ่ม dark mode ด้วย
+Claude: 💡 รับ → เพิ่มเข้า MAP → ทำต่อ
+```
+
+**Enlighten:**
+```
+User: ลองหาจาก SEC filings
+Claude: 💡 รับ → ปรับทิศทาง → ขุดต่อ
+```
+
+---
+
+## 🔋 Token Management
+
+AXON ออกแบบมาให้ทำงานต่อเนื่องได้แม้ context เต็ม:
+
+- **Smart File Reading** - อ่านเฉพาะส่วนที่ต้องใช้
+- **Checkpoint System** - บันทึก state ก่อนเปลี่ยน task
+- **Recovery Protocol** - กลับมาต่อได้หลัง compact
+- **Parallel Execution** - ทำหลาย tool calls พร้อมกัน
 
 ---
 
@@ -287,13 +449,43 @@ Configuration - ตั้งค่า Knowledge Base, MCP
 ## 🔄 การอัพเดท Plugin
 
 ### อัพเดทเป็นเวอร์ชันล่าสุด
-```bash
-/plugin update axon-zenith
+
+**Windows:**
+```powershell
+Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\commands\axon"
+git clone https://github.com/vongsagon-git/axon-zenith.git "$env:USERPROFILE\.claude\temp-axon"
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\commands\axon"
+Copy-Item "$env:USERPROFILE\.claude\temp-axon\commands\*.md" "$env:USERPROFILE\.claude\commands\axon\"
+Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\temp-axon"
 ```
 
-### ดูเวอร์ชันปัจจุบัน
+**macOS / Linux:**
 ```bash
-/plugin list
+rm -rf ~/.claude/commands/axon
+git clone https://github.com/vongsagon-git/axon-zenith.git /tmp/axon-zenith
+mkdir -p ~/.claude/commands/axon
+cp /tmp/axon-zenith/commands/*.md ~/.claude/commands/axon/
+rm -rf /tmp/axon-zenith
+```
+
+---
+
+## 🔥 Core Philosophy: ไม่มีจุดจบ
+
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║  🔥 AXON = ไม่มีคำว่าจบ                                            ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║  📐 CONCEPT: วางแผน → สร้าง MAP → MAP หมด? สร้างงานใหม่!          ║
+║  🔥 IGNITE: ทำตาม MAP → MAP หมด? หางานใหม่!                       ║
+║  🧘 ENLIGHTEN: ขุดข้อมูล → ได้ข้อมูล? หามิติใหม่!                  ║
+║                                                                   ║
+║  🛑 หยุดได้เฉพาะ:                                                  ║
+║     • User พิมพ์ "หยุด" หรือ "stop"                               ║
+║     • ติด API limit                                               ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
 ```
 
 ---
@@ -301,7 +493,12 @@ Configuration - ตั้งค่า Knowledge Base, MCP
 ## ❓ FAQ
 
 ### Q: ทำไมระบบไม่หยุด?
-**A:** นี่คือ design - ระบบจะทำงานไปเรื่อยๆ จนเสร็จ พิมพ์ `หยุด` ถ้าต้องการหยุด
+**A:** นี่คือ design - ระบบจะทำงานไปเรื่อยๆ พิมพ์ `หยุด` ถ้าต้องการหยุด
+
+### Q: Concept vs Enlighten ต่างกันยังไง?
+**A:**
+- **Concept**: วางแผนก่อน → ทำตามแผน (เหมาะกับงาน dev)
+- **Enlighten**: ไม่วางแผน → คิดสดๆ (เหมาะกับ research)
 
 ### Q: เปลี่ยน Knowledge Base ได้ไหม?
 **A:** ได้ แก้ไขที่ `.axon/config.md` แล้วรัน `/axon:mcp recommend`
@@ -313,6 +510,12 @@ Configuration - ตั้งค่า Knowledge Base, MCP
 **A:** หลังติดตั้ง MCP ต้อง Reload Claude Code:
 - VSCode: `Ctrl+Shift+P` → "Developer: Reload Window"
 - Terminal: ปิดแล้วเปิดใหม่
+
+### Q: โปรเจคเก่าอัพเกรดได้ไหม?
+**A:** ได้! ใช้ `/axon:upgrade` ระบบจะ backup และอัพเดทให้อัตโนมัติ
+
+### Q: ใบ้ระหว่างทำงานได้ไหม?
+**A:** ได้! ทั้ง Ignite และ Enlighten รับใบ้จาก user ได้ตลอด
 
 ---
 
