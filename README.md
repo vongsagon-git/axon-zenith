@@ -5,35 +5,61 @@
 
 ---
 
-## 📥 Installation
+## 📥 Installation / Update (ติดตั้งหรืออัพเดท)
 
-### Clone จาก GitHub (แนะนำ)
+> **ใช้คำสั่งเดียวกัน** ทั้งติดตั้งใหม่และอัพเดท!
 
-**Windows (PowerShell):**
+### Windows (PowerShell)
+
 ```powershell
-# ล้างของเดิม (ถ้ามี)
+# ติดตั้งใหม่ หรือ อัพเดท (คำสั่งเดียวกัน!)
 Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\commands\axon" -ErrorAction SilentlyContinue
-
-# ติดตั้งใหม่
 git clone https://github.com/vongsagon-git/axon-zenith.git "$env:USERPROFILE\.claude\temp-axon"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\commands\axon"
 Copy-Item "$env:USERPROFILE\.claude\temp-axon\commands\*.md" "$env:USERPROFILE\.claude\commands\axon\"
 Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\temp-axon"
 ```
 
-**macOS / Linux:**
-```bash
-# ล้างของเดิม (ถ้ามี)
-rm -rf ~/.claude/commands/axon
+### macOS / Linux
 
-# ติดตั้งใหม่
+```bash
+# ติดตั้งใหม่ หรือ อัพเดท (คำสั่งเดียวกัน!)
+rm -rf ~/.claude/commands/axon
 git clone https://github.com/vongsagon-git/axon-zenith.git /tmp/axon-zenith
 mkdir -p ~/.claude/commands/axon
 cp /tmp/axon-zenith/commands/*.md ~/.claude/commands/axon/
 rm -rf /tmp/axon-zenith
 ```
 
-> หลังติดตั้ง พิมพ์ `/axon` จะเห็น commands ทั้ง 6 ตัว
+### ✅ ตรวจสอบการติดตั้ง
+
+```bash
+# พิมพ์ในช่อง Claude Code
+/axon
+```
+
+ถ้าเห็น **6 commands** แสดงว่าติดตั้งสำเร็จ:
+- `/axon:setup` - สร้างไฟล์ระบบ
+- `/axon:concept` - วางแผน
+- `/axon:ignite` - ทำงานไม่หยุด
+- `/axon:enlighten` - ตรัสรู้ไปทำไป
+- `/axon:mcp` - จัดการ MCP
+- `/axon:upgrade` - อัพเกรดโปรเจคเก่า
+
+### 🔄 อัพเกรดโปรเจคเก่า
+
+หลังอัพเดท plugin แล้ว ถ้ามีโปรเจคที่ใช้ AXON version เก่า:
+
+```bash
+# ในโปรเจคที่ต้องการอัพเกรด
+/axon:upgrade
+```
+
+ระบบจะ:
+1. ตรวจ version ปัจจุบัน
+2. Backup ไฟล์เดิม
+3. อัพเกรดเป็น v1.3 อัตโนมัติ
+4. รักษา customization ของ user
 
 ---
 
@@ -437,30 +463,6 @@ AXON ใช้ **Boss-Worker Pattern** เพื่อทำงานเร็�
 - ไม่ลืมว่ารู้อะไรแล้ว
 - เห็น gaps ที่ยังไม่ได้ค้น
 - หลัง compact ความรู้ยังอยู่
-
----
-
-## 🔄 Update Plugin
-
-**อัพเดทเป็นเวอร์ชันล่าสุด:**
-
-**Windows:**
-```powershell
-Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\commands\axon"
-git clone https://github.com/vongsagon-git/axon-zenith.git "$env:USERPROFILE\.claude\temp-axon"
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\commands\axon"
-Copy-Item "$env:USERPROFILE\.claude\temp-axon\commands\*.md" "$env:USERPROFILE\.claude\commands\axon\"
-Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\temp-axon"
-```
-
-**macOS / Linux:**
-```bash
-rm -rf ~/.claude/commands/axon
-git clone https://github.com/vongsagon-git/axon-zenith.git /tmp/axon-zenith
-mkdir -p ~/.claude/commands/axon
-cp /tmp/axon-zenith/commands/*.md ~/.claude/commands/axon/
-rm -rf /tmp/axon-zenith
-```
 
 ---
 
