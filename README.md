@@ -7,10 +7,21 @@
 
 ## 📥 Installation
 
-```bash
-# ใน Claude Code พิมพ์:
-/plugin install vongsagon-git/axon-zenith
+### Clone จาก GitHub (แนะนำ)
+
+**Windows (PowerShell):**
+```powershell
+git clone https://github.com/vongsagon-git/axon-zenith.git "$env:USERPROFILE\.claude\commands\axon-zenith"
+xcopy /E /I /Y "$env:USERPROFILE\.claude\commands\axon-zenith\commands\*" "$env:USERPROFILE\.claude\commands\axon\"
 ```
+
+**macOS / Linux:**
+```bash
+git clone https://github.com/vongsagon-git/axon-zenith.git ~/.claude/commands/axon-zenith
+cp -r ~/.claude/commands/axon-zenith/commands/* ~/.claude/commands/axon/
+```
+
+> หลังติดตั้ง พิมพ์ `/axon` จะเห็น commands ทั้ง 4 ตัว
 
 **📖 [คู่มือการใช้งานฉบับเต็ม (ภาษาไทย)](GUIDE.md)**
 
