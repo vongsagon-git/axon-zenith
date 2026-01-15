@@ -56,9 +56,9 @@ rm -rf /tmp/axon-zenith
 ```
 
 ระบบจะ:
-1. ตรวจ version ปัจจุบัน
+1. ตรวจ version ปัจจุบัน (dynamic detection)
 2. Backup ไฟล์เดิม
-3. อัพเกรดเป็น v1.3 อัตโนมัติ
+3. อัพเกรดเป็น version ล่าสุดอัตโนมัติ
 4. รักษา customization ของ user
 
 ---
@@ -73,6 +73,9 @@ AXON Zenith เปลี่ยน Claude ให้เป็น **Autonomous Agen
 - **Multi-Agent** - Boss-Worker pattern (Opus + Haiku workers)
 - **Unified Knowledge** - บันทึกความรู้ไว้ที่เดียว ไม่ทำซ้ำ
 - **รับใบ้ได้** - User ชี้ทางระหว่างทำได้ตลอด
+- **Parallel Execution** - ทำหลาย tool calls พร้อมกัน (v1.4)
+- **Dual Power** - ใช้ทั้ง Claude Knowledge + Web Search แล้วเทียบ (v1.4)
+- **Audit Agent** - ตรวจสอบความถูกต้องแบบ background (v1.4)
 
 ---
 
@@ -210,15 +213,21 @@ User: หยุด
 
 ```
 ╔═══════════════════════════════════════════════════════════════════╗
-║  🔥 AXON v1.3 = MAP-Centric + Live Enlightenment                  ║
+║  🔥 AXON v1.4 = Parallel + Dual Power + Audit Agent               ║
 ╠═══════════════════════════════════════════════════════════════════╣
 ║                                                                   ║
 ║  📋 MAP = ศูนย์กลางของทุกอย่าง                                     ║
 ║  🧘 ตรัสรู้ = พลังที่ทำให้ MAP โตขึ้น                               ║
+║  🔍 Audit = ตรวจสอบความถูกต้อง (background)                       ║
 ║                                                                   ║
 ║  📐 CONCEPT: วางแผน → สร้าง MAP (ยังไม่ทำ)                         ║
 ║  🔥 IGNITE: ทำตาม MAP + ตรัสรู้ระหว่างทาง + เพิ่ม tasks ได้       ║
 ║  🧘 ENLIGHTEN: ตรัสรู้ไป ทำไป สร้าง MAP ไป (ไม่ต้องวางแผนก่อน)   ║
+║                                                                   ║
+║  ⚡ v1.4 Features:                                                 ║
+║     • PARALLEL EXECUTION - ทำหลาย tool calls พร้อมกัน            ║
+║     • DUAL POWER - Claude Knowledge + Web Search → เทียบ          ║
+║     • AUDIT AGENT - spawn background agent ตรวจสอบ                ║
 ║                                                                   ║
 ║  🛑 หยุดได้เฉพาะ:                                                  ║
 ║     • User พิมพ์ "หยุด" หรือ "stop"                               ║
@@ -227,7 +236,7 @@ User: หยุด
 ╚═══════════════════════════════════════════════════════════════════╝
 ```
 
-### 🔗 Unified Flow (v1.3)
+### 🔗 Unified Flow (v1.4)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════╗
@@ -486,6 +495,10 @@ AXON ใช้ **Boss-Worker Pattern** เพื่อทำงานเร็�
 - [x] **v1.3** - MAP-Centric Design
 - [x] **v1.3** - Live Enlightenment (ตรัสรู้ระหว่างทำ)
 - [x] **v1.3** - Universal Resume (กลับมาทำต่อได้จากทุก mode)
+- [x] **v1.4** - Parallel Execution Rule (ทำหลาย tool calls พร้อมกัน)
+- [x] **v1.4** - Dual Power Protocol (Claude Knowledge + Web Search)
+- [x] **v1.4** - Audit Agent (Background verification)
+- [x] **v1.4** - Dynamic Version Detection (ไม่ต้อง hardcode version)
 - [ ] **v2.0** - Vector Memory
 
 ---
