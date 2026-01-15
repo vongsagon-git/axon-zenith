@@ -147,11 +147,8 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 ║  📁 SOURCE = axon-new repository                                      ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║                                                                       ║
-║  Latest CLAUDE.md:                                                    ║
+║  Latest CLAUDE.md (Single Source of Truth):                           ║
 ║     → axon-new/templates/CLAUDE.md                                   ║
-║                                                                       ║
-║  Feature Reference:                                                   ║
-║     → axon-new/CLAUDE.md (root)                                      ║
 ║                                                                       ║
 ║  Commands:                                                            ║
 ║     → axon-new/commands/*.md                                         ║
@@ -228,7 +225,7 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 
 ```markdown
 ## Before Upgrade
-□ อ่าน version จาก source (axon-new/CLAUDE.md)
+□ อ่าน version จาก source (axon-new/templates/CLAUDE.md)
 □ อ่าน version จาก user's CLAUDE.md
 □ เปรียบเทียบ → ต้อง upgrade หรือเปล่า?
 □ สร้าง backup
@@ -325,7 +322,7 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
    └──────────────────────────────────────────────────────────┘
 
 2. อ่าน LATEST VERSION จาก source
-   → Read axon-new/CLAUDE.md หรือ axon-new/templates/CLAUDE.md
+   → Read axon-new/templates/CLAUDE.md
    → หา "Master Blueprint vX.X"
    → หา features (AUDIT AGENT, DUAL POWER, etc.)
 
@@ -370,13 +367,13 @@ description: "Upgrade AXON - อัพเกรดโปรเจคเก่า
 ║  ❌ ห้าม HARDCODE version ในไฟล์นี้                                   ║
 ║                                                                       ║
 ║  ✅ ต้อง READ version จาก:                                            ║
-║     • Source: axon-new/CLAUDE.md (latest)                            ║
+║     • Source: axon-new/templates/CLAUDE.md (latest)                  ║
 ║     • User: user's CLAUDE.md (current)                               ║
 ║                                                                       ║
 ║  🔄 เมื่อมี version ใหม่:                                             ║
-║     • อัพเดท CLAUDE.md ใน axon-new                                   ║
-║     • อัพเดท templates/CLAUDE.md ใน axon-new                         ║
+║     • อัพเดท templates/CLAUDE.md ใน axon-new (ที่เดียว!)             ║
 ║     • ไม่ต้องแก้ไฟล์ upgrade.md นี้!                                  ║
+║     • ไม่มี root CLAUDE.md อีกต่อไป!                                 ║
 ║                                                                       ║
 ║  📋 VERSION DETECTION PRIORITY:                                       ║
 ║     1. หา "Master Blueprint vX.X" ใน title                          ║

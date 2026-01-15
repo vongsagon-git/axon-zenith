@@ -334,9 +334,45 @@ AXON ออกแบบมาให้ทำงานต่อเนื่อง
 
 ---
 
-## 📁 Files Created
+## 📁 Project Structure
 
-เมื่อรัน `/axon:setup` จะสร้างไฟล์:
+โครงสร้างของ AXON Plugin:
+
+```
+axon-new/
+├── templates/              # 📦 Source of Truth
+│   ├── CLAUDE.md          # ⭐ Master Blueprint (v8.0) - Single Source!
+│   ├── AXON_MAP.md        # Template สำหรับ Roadmap
+│   ├── AXON_STATE.md      # Template สำหรับ State
+│   ├── AXON_KNOWLEDGE.md  # Template สำหรับ Knowledge
+│   └── config.md          # Template สำหรับ Config
+│
+├── commands/              # 🎮 Skills (Commands)
+│   ├── setup.md          # /axon:setup
+│   ├── concept.md        # /axon:concept
+│   ├── ignite.md         # /axon:ignite
+│   ├── enlighten.md      # /axon:enlighten
+│   ├── mcp.md            # /axon:mcp
+│   └── upgrade.md        # /axon:upgrade
+│
+└── README.md             # คู่มือหลัก
+```
+
+### 🔑 ไฟล์สำคัญ
+
+| ไฟล์ | บทบาท | การใช้งาน |
+|------|-------|----------|
+| **templates/CLAUDE.md** | ⭐ **Single Source of Truth** | `/axon:setup` copy ไปโปรเจค<br>`/axon:upgrade` อ่านเป็น source<br>**แก้ที่เดียว → ทุกโปรเจคได้รับ!** |
+| `commands/*.md` | Skills definitions | Claude Code โหลดเป็น commands |
+| `templates/*.md` | Templates อื่นๆ | Setup ใช้ copy ไปโปรเจค |
+
+> ⚠️ **หมายเหตุ:** ไม่มี root `CLAUDE.md` อีกต่อไป! ใช้ `templates/CLAUDE.md` เป็น single source
+
+---
+
+## 📁 Files Created (เมื่อรัน /axon:setup)
+
+เมื่อรัน `/axon:setup` ในโปรเจค จะสร้างไฟล์:
 
 ```
 📁 โปรเจคของคุณ/
