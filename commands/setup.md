@@ -180,37 +180,94 @@ tmpclaude-*
 
 ### 5. ตรวจสอบและแนะนำ MCP Servers
 
-รัน `claude mcp list` และแนะนำ MCP **ตาม Knowledge Type ที่เลือก:**
+#### 5.1 ตรวจสอบ MCP ที่มีอยู่
 
-#### IF Knowledge = Text Files:
-| MCP | ใช้สำหรับ |
-|-----|---------|
-| fetch | ดึงข้อมูลจาก URL |
-| puppeteer | ควบคุม browser |
-| memory | Knowledge graph |
+```bash
+# ดู MCP ที่ติดตั้งแล้ว
+claude mcp list
+```
 
-#### IF Knowledge = DigitalOcean Gradient:
+**ผลลัพธ์ที่ควรเห็น:**
+```
+┌─────────────┬────────┬─────────────────────────────┐
+│ MCP Server  │ Status │ Description                 │
+├─────────────┼────────┼─────────────────────────────┤
+│ memory      │ ✅     │ Knowledge graph storage     │
+│ fetch       │ ✅     │ Fetch URLs                  │
+│ puppeteer   │ ✅     │ Browser control             │
+└─────────────┴────────┴─────────────────────────────┘
+```
+
+#### 5.2 ติดตั้ง MCP ที่จำเป็น (ถ้ายังไม่มี)
+
+> 💡 ใช้ `-s user` เพื่อติดตั้งแบบ **global** (ใช้ได้ทุกโปรเจค)
+
+**🧠 Memory MCP (จำเป็นสำหรับ v1.5!):**
+```bash
+# ติดตั้ง Memory MCP - ความจำถาวรข้าม session (global)
+claude mcp add memory -s user -- npx -y @anthropic/mcp-memory
+```
+
+**🌐 Fetch MCP:**
+```bash
+# ติดตั้ง Fetch MCP - ดึงข้อมูลจาก URL (global)
+claude mcp add fetch -s user -- npx -y @anthropic/mcp-fetch
+```
+
+**🎭 Puppeteer MCP:**
+```bash
+# ติดตั้ง Puppeteer MCP - ควบคุม browser (global)
+claude mcp add puppeteer -s user -- npx -y @anthropic/mcp-puppeteer
+```
+
+#### 5.3 ตรวจสอบหลังติดตั้ง
+
+```bash
+# ตรวจว่า MCP ทำงานได้
+claude mcp list
+
+# หรือทดสอบ Memory MCP
+# ใน Claude Code พิมพ์:
+# "อ่าน memory graph ให้หน่อย"
+# ควรได้ผลลัพธ์จาก mcp__memory__read_graph()
+```
+
+#### 5.4 แนะนำ MCP ตาม Knowledge Type
+
+##### IF Knowledge = Text Files (Default):
+| MCP | ใช้สำหรับ | ติดตั้ง (global) |
+|-----|---------|---------|
+| **memory** | 🧠 ความจำถาวร (v1.5) | `claude mcp add memory -s user -- npx -y @anthropic/mcp-memory` |
+| fetch | ดึงข้อมูลจาก URL | `claude mcp add fetch -s user -- npx -y @anthropic/mcp-fetch` |
+| puppeteer | ควบคุม browser | `claude mcp add puppeteer -s user -- npx -y @anthropic/mcp-puppeteer` |
+
+##### IF Knowledge = DigitalOcean Gradient:
 | MCP | ใช้สำหรับ |
 |-----|---------|
 | digitalocean | จัดการ DO resources + Gradient |
 | fetch | ดึงข้อมูลเข้า Knowledge Base |
+| **memory** | 🧠 ความจำถาวร (v1.5) |
 
 > 📝 **Transform:** ใช้ DO API `/v2/gen-ai/knowledge_bases` เพื่อ index ข้อมูล
 
-#### IF Knowledge = MongoDB Atlas:
+##### IF Knowledge = MongoDB Atlas:
 | MCP | ใช้สำหรับ |
 |-----|---------|
 | mongodb | MongoDB + Atlas Vector Search |
+| **memory** | 🧠 ความจำถาวร (v1.5) |
 
 > 📝 **Transform:** ใช้ Voyage AI embedding ผ่าน MCP
 
-#### IF Knowledge = Local Vector:
+##### IF Knowledge = Local Vector:
 | MCP | ใช้สำหรับ |
 |-----|---------|
 | qdrant | Vector search (แนะนำ) |
 | chroma | Alternative vector DB |
+| **memory** | 🧠 ความจำถาวร (v1.5) |
 
 > 📝 **Transform:** ต้อง embed เอง หรือใช้ HuggingFace MCP
+
+> ⚠️ **สำคัญ:** Memory MCP เป็น **must-have** สำหรับ AXON v1.5 ทุก Knowledge Type!
 
 ### 6. แสดงคำสั่ง Transform (ถ้าเลือก Vector DB)
 
