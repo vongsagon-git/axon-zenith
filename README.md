@@ -77,6 +77,39 @@ AXON Zenith เปลี่ยน Claude ให้เป็น **Autonomous Agen
 - **Dual Power** - ใช้ทั้ง Claude Knowledge + Web Search แล้วเทียบ (v1.4)
 - **Audit Agent** - ตรวจสอบความถูกต้องแบบ background (v1.4)
 - **Memory Protocol** - ความจำถาวรข้าม session ผ่าน Memory MCP (v1.5)
+- **PREFIX COMMANDS** - ใบ้ระหว่างทำด้วย +task, +hint, +do (v1.5)
+
+---
+
+## 🧠 Memory Protocol (v1.5)
+
+AXON ใช้ **Memory MCP** เพื่อจำข้าม session:
+
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║  🧠 MEMORY = ไม่ลืม ข้าม session                                   ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║  📥 SESSION START:                                                 ║
+║     → mcp__memory__read_graph()  (ดูทุกอย่างที่จำไว้)              ║
+║     → mcp__memory__search_nodes(project)  (หาโปรเจค)              ║
+║                                                                   ║
+║  📝 DURING WORK:                                                   ║
+║     Task สร้าง  → create_entities([{name: "T001", type: "Task"}]) ║
+║     Task เสร็จ  → add_observations([{...contents: ["done"]}])     ║
+║     ตรัสรู้     → create_entities + create_relations              ║
+║                                                                   ║
+║  💾 END:                                                           ║
+║     Memory MCP = Source of Truth (อยู่ถาวร)                       ║
+║     AXON_*.md = Backup + Human Readable                           ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+```
+
+**ติดตั้ง Memory MCP (จำเป็น!):**
+```bash
+claude mcp add memory -s user -- npx -y @anthropic/mcp-memory
+```
 
 ---
 
@@ -306,20 +339,38 @@ User: หยุด
 
 ---
 
-## 💡 User Hints (ใบ้ระหว่างทาง)
+## 💡 User Hints (ใบ้ระหว่างทาง) - v1.5
 
-ทุก Mode รับใบ้จาก user ได้ตลอด:
+ระหว่าง IGNITE/ENLIGHTEN ใช้ **PREFIX COMMANDS** เพื่อสั่งงาน:
 
-**Ignite:**
 ```
-User: เพิ่ม dark mode ด้วย
-Claude: 💡 รับ → เพิ่มเข้า MAP → ทำต่อ
+╔═══════════════════════════════════════════════════════════════════╗
+║  💡 PREFIX COMMANDS (ใช้ + หรือ ! นำหน้า)                          ║
+╠═══════════════════════════════════════════════════════════════════╣
+║  +task [description]  → เพิ่ม task ใหม่ใน MAP                     ║
+║  +hint [description]  → เพิ่ม hint/แนะนำ                          ║
+║  +do [task_id]        → ทำ task นี้ก่อน (เปลี่ยน priority)        ║
+║  +skip [task_id]      → ข้าม task นี้ไปก่อน                       ║
+║  +note [text]         → เพิ่ม note ใน STATE                       ║
+║                                                                   ║
+║  🛑 CONTROL:                                                       ║
+║  หยุด / stop / พอ     → หยุดทำงาน                                 ║
+║  ต่อ / continue       → ทำงานต่อ                                  ║
+║                                                                   ║
+║  💬 ไม่มี prefix → Claude ทำงานต่อตามปกติ                         ║
+╚═══════════════════════════════════════════════════════════════════╝
 ```
 
-**Enlighten:**
+**ตัวอย่าง:**
 ```
-User: ลองหาจาก SEC filings
-Claude: 💡 รับ → ปรับทิศทาง → ขุดต่อ
+User: +task เพิ่ม dark mode ด้วย
+Claude: 💡 รับ → [H001] เพิ่ม dark mode → เพิ่มเข้า MAP → ทำต่อ
+
+User: +do T003
+Claude: 💡 รับ → ทำ [T003] ก่อน → ปรับ priority
+
+User: +skip T005
+Claude: 💡 รับ → ข้าม [T005] → ทำ task ถัดไป
 ```
 
 ---
@@ -537,6 +588,7 @@ AXON ใช้ **Boss-Worker Pattern** เพื่อทำงานเร็�
 - [x] **v1.4** - Audit Agent (Background verification)
 - [x] **v1.4** - Dynamic Version Detection (ไม่ต้อง hardcode version)
 - [x] **v1.5** - Memory Protocol (ความจำถาวรข้าม session ผ่าน Memory MCP)
+- [x] **v1.5** - PREFIX COMMANDS (ใบ้ระหว่างทำ: +task, +hint, +do, +skip, +note)
 - [ ] **v2.0** - Vector Memory
 
 ---
