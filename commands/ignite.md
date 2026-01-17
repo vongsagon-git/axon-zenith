@@ -9,65 +9,53 @@ description: "Start Zenith Loop (Infinite Mode) - ทำงานไม่หย
 
 ---
 
-## 💡 รับใบ้ระหว่างทำ (Live Hints) - MANDATORY!
+## 💡 รับใบ้ระหว่างทำ (Live Hints)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
-║  🚨 MANDATORY RULE: ทุกครั้งที่ User พิมพ์อะไรมา → ต้องตรวจก่อน!       ║
+║  💡 USER HINT COMMANDS (ใช้ prefix เพื่อสั่งงาน)                       ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║                                                                       ║
-║  📌 BEFORE doing anything, CHECK user message:                        ║
+║  📌 PREFIX COMMANDS (ต้องขึ้นต้นด้วย + หรือ !):                        ║
 ║                                                                       ║
-║  IF message contains request/suggestion/hint:                         ║
-║     1. ✅ ตอบรับทันที: "รับใบ้! เพิ่ม [Hxxx] ..."                      ║
-║     2. ✏️ เพิ่ม task ใน AXON_MAP.md ทันที (H = Hint task)              ║
-║     3. 🧠 บันทึกใน Memory MCP                                          ║
-║     4. 🔄 ทำงานต่อ (task เดิม หรือ task ใหม่ตาม priority)              ║
+║  +task [description]     → เพิ่ม task ใหม่ใน MAP                      ║
+║  +hint [description]     → เพิ่ม hint/แนะนำ                           ║
+║  +do [task_id]           → ทำ task นี้ก่อน (เปลี่ยน priority)         ║
+║  +skip [task_id]         → ข้าม task นี้ไปก่อน                        ║
+║  +note [text]            → เพิ่ม note ใน STATE                        ║
 ║                                                                       ║
-║  IF message = "หยุด" / "stop" / "พอ":                                ║
-║     → หยุดทำงาน, บันทึก state                                         ║
+║  🛑 CONTROL COMMANDS:                                                  ║
+║  หยุด / stop / พอ        → หยุดทำงาน                                  ║
+║  ต่อ / continue          → ทำงานต่อ                                   ║
 ║                                                                       ║
-║  ELSE (message ไม่ชัดเจน):                                             ║
-║     → ถาม user ว่าต้องการอะไร                                         ║
+║  💬 ถ้าไม่มี prefix → Claude ทำงานต่อตามปกติ                          ║
 ║                                                                       ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
-### 📋 HINT DETECTION PATTERNS
+### 📋 PREFIX REFERENCE
 
-```
-╔═══════════════════════════════════════════════════════════════════════╗
-║  🔍 ตรวจจับ Hint จาก User Message                                      ║
-╠═══════════════════════════════════════════════════════════════════════╣
-║                                                                       ║
-║  ✅ เป็น HINT (ต้องเพิ่ม task):                                        ║
-║     • "เพิ่ม X ด้วย" / "ทำ X ด้วย" / "อย่าลืม X"                      ║
-║     • "ลองดู X" / "ช่วย X หน่อย"                                       ║
-║     • "ใช้ X แทน Y" / "เปลี่ยนเป็น X"                                  ║
-║     • "priority X ก่อน" / "ทำ X ก่อน"                                  ║
-║     • "test X ด้วย" / "เช็ค X"                                         ║
-║     • คำสั่ง/คำขอ ที่ไม่ใช่ "หยุด"                                     ║
-║                                                                       ║
-║  🛑 ไม่ใช่ HINT:                                                        ║
-║     • "หยุด" / "stop" / "พอ" / "จบ"                                   ║
-║     • "ดีมาก" / "โอเค" / "เยี่ยม" (เป็นแค่ feedback)                   ║
-║                                                                       ║
-╚═══════════════════════════════════════════════════════════════════════╝
-```
+| Prefix | Action | ตัวอย่าง |
+|--------|--------|---------|
+| `+task` | เพิ่ม task ใหม่ | `+task เพิ่ม dark mode` |
+| `+hint` | เพิ่ม hint/แนะนำ | `+hint ลองใช้ Zustand` |
+| `+do` | ทำ task นี้ก่อน | `+do T003` |
+| `+skip` | ข้าม task นี้ | `+skip T002` |
+| `+note` | เพิ่ม note | `+note อย่าลืม test` |
 
 ### ⚡ HINT PROCESSING FLOW
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
-║  User พิมพ์: "เพิ่ม dark mode ด้วย"                                    ║
+║  User พิมพ์: "+task เพิ่ม dark mode"                                   ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║                                                                       ║
-║  STEP 1: ตรวจจับว่าเป็น Hint ✅                                        ║
+║  STEP 1: ตรวจจับ prefix "+task" ✅                                    ║
 ║                                                                       ║
 ║  STEP 2: ตอบรับทันที                                                   ║
 ║  ┌─────────────────────────────────────────────────────────────────┐  ║
-║  │ ✅ รับใบ้! เพิ่ม task:                                           │  ║
-║  │ [H001] Implement dark mode                                      │  ║
+║  │ ✅ รับแล้ว! เพิ่ม task:                                          │  ║
+║  │ [H001] เพิ่ม dark mode                                          │  ║
 ║  │ → เพิ่มใน AXON_MAP.md แล้ว                                       │  ║
 ║  │ → ทำงานต่อ...                                                    │  ║
 ║  └─────────────────────────────────────────────────────────────────┘  ║
@@ -77,7 +65,7 @@ description: "Start Zenith Loop (Infinite Mode) - ทำงานไม่หย
 ║  ## 📋 Active Tasks                                                   ║
 ║  - [x] [T001] Setup project                                          ║
 ║  - [ ] [T002] Create login page        ← กำลังทำ                      ║
-║  - [ ] [H001] Implement dark mode      ← 🆕 จาก user hint!            ║
+║  - [ ] [H001] เพิ่ม dark mode          ← 🆕 จาก +task                 ║
 ║  ```                                                                  ║
 ║                                                                       ║
 ║  STEP 4: บันทึก Memory MCP                                            ║
@@ -87,7 +75,7 @@ description: "Start Zenith Loop (Infinite Mode) - ทำงานไม่หย
 ║      observations: ["source:user_hint", "status:pending"]            ║
 ║    }])                                                               ║
 ║                                                                       ║
-║  STEP 5: ทำงานต่อ (T002 หรือ H001 ตาม priority)                       ║
+║  STEP 5: ทำงานต่อ (T002 ต่อ, H001 รอคิว)                              ║
 ║                                                                       ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
@@ -99,7 +87,7 @@ description: "Start Zenith Loop (Infinite Mode) - ทำงานไม่หย
 | **T** | จาก CONCEPT (วางแผน) | T001, T002 |
 | **E** | จาก ENLIGHTEN (ตรัสรู้) | E001, E002 |
 | **A** | จาก AUDIT (ตรวจสอบ) | A001, A002 |
-| **H** | จาก USER HINT (ใบ้) | H001, H002 |
+| **H** | จาก USER HINT (+task/+hint) | H001, H002 |
 
 ---
 

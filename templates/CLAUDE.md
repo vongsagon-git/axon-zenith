@@ -28,25 +28,22 @@
 
 ```
 ╔═══════════════════════════════════════════════════════════════════╗
-║  🚨 MANDATORY: ทุกครั้งที่ User พิมพ์ → ตรวจก่อนทำอะไร!            ║
+║  💡 USER HINT COMMANDS (ใช้ prefix เพื่อสั่งงาน)                   ║
 ╠═══════════════════════════════════════════════════════════════════╣
 ║                                                                   ║
-║  📌 CHECK user message FIRST:                                     ║
+║  📌 PREFIX COMMANDS:                                               ║
 ║                                                                   ║
-║  IF message = request/hint (เพิ่ม, ทำ, ลอง, อย่าลืม, etc.):       ║
-║     1. ✅ ตอบรับ: "รับใบ้! เพิ่ม [Hxxx] ..."                       ║
-║     2. ✏️ เพิ่ม task ใน AXON_MAP.md ทันที                          ║
-║     3. 🧠 บันทึก Memory MCP                                        ║
-║     4. 🔄 ทำงานต่อ                                                 ║
+║  +task [description]     → เพิ่ม task ใหม่ใน MAP                  ║
+║  +hint [description]     → เพิ่ม hint/แนะนำ                       ║
+║  +do [task_id]           → ทำ task นี้ก่อน                        ║
+║  +skip [task_id]         → ข้าม task นี้                          ║
+║  +note [text]            → เพิ่ม note                             ║
 ║                                                                   ║
-║  IF message = "หยุด" / "stop" / "พอ":                            ║
-║     → หยุดทำงาน                                                   ║
+║  🛑 CONTROL:                                                       ║
+║  หยุด / stop / พอ        → หยุดทำงาน                              ║
+║  ต่อ / continue          → ทำงานต่อ                               ║
 ║                                                                   ║
-║  ⚡ HINT PATTERNS (ต้องเพิ่ม task):                                ║
-║     • "เพิ่ม X ด้วย" / "ทำ X ด้วย"                                ║
-║     • "อย่าลืม X" / "ลองดู X"                                     ║
-║     • "ใช้ X แทน Y" / "priority X ก่อน"                           ║
-║     • คำขอใดๆ ที่ไม่ใช่ "หยุด"                                    ║
+║  💬 ไม่มี prefix → Claude ทำงานต่อตามปกติ                         ║
 ║                                                                   ║
 ║  🏷️ TASK ID: H001, H002... (H = Hint from user)                  ║
 ║                                                                   ║
