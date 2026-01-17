@@ -62,6 +62,39 @@ description: "Setup AXON system - สร้างทุกไฟล์ที่�
 - [ ] etc.
 ```
 
+### 0.2 🧠 MEMORY SYNC (บันทึกถาวร!)
+
+**บันทึก Project ใน Memory MCP เพื่อจำข้าม session:**
+
+```javascript
+// สร้าง Project Entity พร้อม Knowledge Config
+mcp__memory__create_entities([{
+  name: "Project_[folder_name]",
+  entityType: "Project",
+  observations: [
+    "knowledge_base: [user choice]",
+    "setup_date: [timestamp]",
+    "status: initialized"
+  ]
+}])
+```
+
+**ตัวอย่าง:**
+```javascript
+// ถ้า user เลือก Text Files ใน folder "my-app"
+mcp__memory__create_entities([{
+  name: "Project_my-app",
+  entityType: "Project",
+  observations: [
+    "knowledge_base: Text Files",
+    "setup_date: 2025-01-18",
+    "status: initialized"
+  ]
+}])
+```
+
+> 💡 **ทำไมต้องบันทึก?** เพื่อให้ session หน้า `/axon:ignite` รู้ว่าโปรเจคนี้ใช้ Knowledge Base แบบไหน
+
 ### 1. สร้างไฟล์ทั้งหมด (ถ้ายังไม่มี)
 
 #### CLAUDE.md (Master Blueprint)
