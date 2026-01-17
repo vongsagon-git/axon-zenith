@@ -76,6 +76,7 @@ AXON Zenith เปลี่ยน Claude ให้เป็น **Autonomous Agen
 - **Parallel Execution** - ทำหลาย tool calls พร้อมกัน (v1.4)
 - **Dual Power** - ใช้ทั้ง Claude Knowledge + Web Search แล้วเทียบ (v1.4)
 - **Audit Agent** - ตรวจสอบความถูกต้องแบบ background (v1.4)
+- **Memory Protocol** - ความจำถาวรข้าม session ผ่าน Memory MCP (v1.5)
 
 ---
 
@@ -535,6 +536,7 @@ AXON ใช้ **Boss-Worker Pattern** เพื่อทำงานเร็�
 - [x] **v1.4** - Dual Power Protocol (Claude Knowledge + Web Search)
 - [x] **v1.4** - Audit Agent (Background verification)
 - [x] **v1.4** - Dynamic Version Detection (ไม่ต้อง hardcode version)
+- [x] **v1.5** - Memory Protocol (ความจำถาวรข้าม session ผ่าน Memory MCP)
 - [ ] **v2.0** - Vector Memory
 
 ---

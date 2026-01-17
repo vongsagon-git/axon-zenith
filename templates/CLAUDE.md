@@ -171,6 +171,76 @@
 
 ---
 
+## 🧠 MEMORY PROTOCOL (ความจำถาวร - ไม่ลืม!)
+
+```
+╔═══════════════════════════════════════════════════════════════╗
+║  🧠 MEMORY MCP = ความจำข้าม Session!                          ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  📌 RULE: ทุกจุดที่มีการเปลี่ยนแปลง → บันทึก Memory!          ║
+║                                                               ║
+║  🔄 MEMORY SYNC POINTS (ต้องบันทึกทุกจุด!):                   ║
+║                                                               ║
+║  1. 🆕 สร้าง TASK ใหม่ → create_entities                     ║
+║     Entity: {name: "T001", type: "Task", observations: [...]}║
+║                                                               ║
+║  2. ✅ TASK เสร็จ → add_observations                          ║
+║     เพิ่ม: "completed", "result: ...", "learned: ..."        ║
+║                                                               ║
+║  3. 💡 ตรัสรู้ → create_entities + create_relations          ║
+║     Entity: {name: "Insight_001", type: "Knowledge"}         ║
+║     Relation: {from: "T001", to: "Insight_001", type: "discovered"}║
+║                                                               ║
+║  4. 🔍 AUDIT พบสิ่งใหม่ → add_observations                    ║
+║     เพิ่ม: "verified: true/false", "evidence: ..."           ║
+║                                                               ║
+║  5. 🔗 เชื่อมโยงความรู้ → create_relations                   ║
+║     Relation: {from: "X", to: "Y", type: "relates_to"}       ║
+║                                                               ║
+╠═══════════════════════════════════════════════════════════════╣
+║  📋 ENTITY TYPES:                                             ║
+║                                                               ║
+║  | Type | ใช้สำหรับ | ตัวอย่าง |                              ║
+║  |------|----------|---------|                                ║
+║  | Task | งานใน MAP | T001, E001, A001 |                      ║
+║  | Knowledge | ความรู้ที่ได้ | "React hooks pattern" |        ║
+║  | Project | โปรเจค | "Coffee Tuner" |                        ║
+║  | Person | บุคคล | "TLE" |                                   ║
+║  | Decision | การตัดสินใจ | "เลือก Zustand over Redux" |     ║
+║                                                               ║
+╠═══════════════════════════════════════════════════════════════╣
+║  📋 RELATION TYPES:                                           ║
+║                                                               ║
+║  | Type | ความหมาย |                                          ║
+║  |------|---------|                                           ║
+║  | discovered | ค้นพบจาก |                                    ║
+║  | depends_on | ขึ้นอยู่กับ |                                 ║
+║  | relates_to | เกี่ยวข้องกับ |                               ║
+║  | implements | ใช้งาน |                                      ║
+║  | verified_by | ตรวจสอบโดย |                                 ║
+║  | part_of | เป็นส่วนของ |                                    ║
+║                                                               ║
+╠═══════════════════════════════════════════════════════════════╣
+║  🚀 MEMORY ACTIONS:                                           ║
+║                                                               ║
+║  ก่อนเริ่มงาน:                                                ║
+║     → mcp__memory__read_graph() ดูภาพรวม                     ║
+║     → mcp__memory__search_nodes("keyword") หาที่เกี่ยวข้อง   ║
+║                                                               ║
+║  ระหว่างทำงาน:                                                ║
+║     → mcp__memory__create_entities([...]) บันทึก entity      ║
+║     → mcp__memory__create_relations([...]) สร้างความสัมพันธ์ ║
+║     → mcp__memory__add_observations([...]) เพิ่มข้อมูล       ║
+║                                                               ║
+║  ❌ ห้ามลืมบันทึก! ทุกการเปลี่ยนแปลง = sync Memory           ║
+║  ✅ Memory = Source of Truth ข้าม sessions                    ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+```
+
+---
+
 ## 🎮 COMMAND MODE PROTOCOL
 
 ```

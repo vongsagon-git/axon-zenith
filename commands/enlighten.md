@@ -283,6 +283,98 @@ Topic: "ควรใช้ Zustand หรือ Redux?"
 
 ---
 
+## 🧠 MEMORY SYNC PROTOCOL (บันทึกทุกจุด - ไม่ลืม!)
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║  🧠 MEMORY MCP = ความจำถาวรข้าม Session!                               ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  📌 RULE: ทุกจุดที่มีการเปลี่ยนแปลง → Sync Memory!                    ║
+║                                                                       ║
+║  🔄 MEMORY SYNC POINTS ใน ENLIGHTEN:                                  ║
+║                                                                       ║
+║  1️⃣ ก่อนเริ่ม Enlighten:                                               ║
+║     → mcp__memory__read_graph() ดูภาพรวม                              ║
+║     → mcp__memory__search_nodes(topic) หาที่เกี่ยวข้อง                ║
+║     → ดูว่ารู้อะไรแล้วบ้าง → ไม่ทำซ้ำ                                 ║
+║                                                                       ║
+║  2️⃣ เมื่อสร้าง Task ใหม่ (E001, E002...):                              ║
+║     → mcp__memory__create_entities([{                                 ║
+║         name: "E001",                                                 ║
+║         entityType: "Task",                                           ║
+║         observations: ["topic: X", "status: pending", "created: now"] ║
+║       }])                                                             ║
+║     → mcp__memory__create_relations([{                                ║
+║         from: "E001", to: "ProjectName", relationType: "part_of"      ║
+║       }])                                                             ║
+║                                                                       ║
+║  3️⃣ เมื่อตรัสรู้เจอ Insight:                                           ║
+║     → mcp__memory__create_entities([{                                 ║
+║         name: "Insight_[topic]",                                      ║
+║         entityType: "Knowledge",                                      ║
+║         observations: ["key finding 1", "key finding 2", ...]         ║
+║       }])                                                             ║
+║     → mcp__memory__create_relations([{                                ║
+║         from: "E001", to: "Insight_[topic]", relationType: "discovered"║
+║       }])                                                             ║
+║                                                                       ║
+║  4️⃣ เมื่อ Task เสร็จ:                                                  ║
+║     → mcp__memory__add_observations([{                                ║
+║         entityName: "E001",                                           ║
+║         contents: ["status: completed", "result: ...", "learned: ..."]║
+║       }])                                                             ║
+║                                                                       ║
+║  5️⃣ เมื่อ Audit verify:                                                ║
+║     → mcp__memory__add_observations([{                                ║
+║         entityName: "Insight_X",                                      ║
+║         contents: ["verified: true", "confidence: 95%", "evidence: X"]║
+║       }])                                                             ║
+║                                                                       ║
+║  ❌ ห้ามลืมบันทึก! ทุกการเปลี่ยนแปลง = Sync Memory                    ║
+║  ✅ Memory = ความจำถาวร (KNOWLEDGE.md = backup อ่านง่าย)               ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+### 📋 ENLIGHTEN + MEMORY EXAMPLE
+
+```
+User: "/axon:enlighten สร้าง todo app"
+
+🧠 STEP 0: READ MEMORY
+   → mcp__memory__search_nodes("todo app")
+   → พบ: มี knowledge เรื่อง "React best practices" อยู่แล้ว
+   → ใช้ความรู้เดิม + หาใหม่
+
+💡 STEP 1: ตรัสรู้ → "ต้องมี auth"
+   → เพิ่ม MAP: [E001] Setup authentication
+   → MEMORY: create_entities([{name: "E001", type: "Task", ...}])
+
+🔥 STEP 2: ทำ E001
+   → สร้าง auth system
+   → ตรัสรู้ระหว่างทำ: "JWT ดีกว่า session"
+   → MEMORY: create_entities([{name: "Insight_JWT_vs_Session", type: "Knowledge"}])
+   → MEMORY: create_relations([{from: "E001", to: "Insight_JWT_vs_Session"}])
+
+✅ STEP 3: E001 เสร็จ
+   → MEMORY: add_observations([{entityName: "E001", contents: ["completed"]}])
+   → อัพเดท KNOWLEDGE.md (backup)
+
+💡 STEP 4: ตรัสรู้ต่อ → "ต้องมี CRUD"
+   → เพิ่ม MAP: [E002] Create todo CRUD
+   → MEMORY: create_entities([{name: "E002", type: "Task", ...}])
+
+... วน ∞ ...
+
+📊 NEXT SESSION:
+   → mcp__memory__read_graph()
+   → เห็นทุก tasks, insights, relations
+   → ทำต่อจากจุดเดิมได้ทันที!
+```
+
+---
+
 ## 🗺️ MAP INTEGRATION PROTOCOL (สร้าง MAP ขณะทำ!)
 
 ```
